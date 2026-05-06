@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preservação da Vida Marinha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #3a628c;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display SC', serif;
+            color: white;
+            overflow: hidden;
+        }
+
+
+        .logo-imagem {
+            position: absolute;
+            top: 20%;
+            left: 49%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shark-logo {
+            width: 330px;
+            height: 300px;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .shark-logo:hover {
+            transform: scale(1.2);
+        }
+
+        .boasvindas {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+            font-size: 18px;
+            line-height: 1.5;
+            color: #f0f8ff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .galeria {
+            position: absolute;
+            top: 47%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .itemgaleria {
+            position: relative;
+            width: 170px;
+            height: 140px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .itemgaleria img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            display: block;
+        }
+
+        .itemgaleria:hover img {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .itemgaleria .legenda {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+            color: white;
+            padding: 25px 10px 12px;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .itemgaleria:hover .legenda {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .legenda::before {
+            content: " ";
+            margin-right: 4px;
+        }
+
+        .Contibv {
+            position: absolute;
+            top: 69%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+            font-size: 18px;
+            line-height: 1.5;
+            color: #f0f8ff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .buttons {
+            position: absolute;
+            top: 75%;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        button,
+        a.botao {
+            background-color: #0074d9;
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 10px;
+            font-family: 'Playfair Display SC', serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 15px rgba(14, 165, 233, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        button:hover,
+        a.botao:hover {
+            background-color: #0c80e6;
+            color: gold;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(14, 165, 233, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo-imagem">
+        <img src="https://i.ibb.co/7dVmxzpb/Captura-de-tela-2026-05-05-102227-1.png"
+            alt="Logo Preservação da Vida Marinha" class="shark-logo"
+            style="filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));">
+    </div>
+
+    <p class="boasvindas">
+        Bem-vindo ao site <strong>Preservação da Vida Marinha</strong>! Aqui você encontra:
+    </p>
+
+    <div class="galeria">
+        <div class="itemgaleria">
+            <img src="https://i.ibb.co/KzpKLNjw/Figura-5-exemplo-de-descri-o.jpg" alt="Forum">
+            <span class="legenda">Fórum</span>
+        </div>
+        <div class="itemgaleria">
+            <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=300" alt="Galeria">
+            <span class="legenda">Galeria</span>
+        </div>
+        <div class="itemgaleria">
+            <img src="https://i.ibb.co/9mGMRYGQ/Negaprion-brevirostris-distribution-map.png"
+                alt="Mapa Vida mMrinha Tubarão Limão">
+            <span class="legenda">Mapa</span>
+        </div>
+
+    </div>
+
+    <p class="Contibv">
+        E muito mais para explorar e proteger nossos oceanos.
+    </p>
+
+    <div class="buttons">
+        <a href="login.html" class="botao">LOGIN</a>
+        <a href="cadastro.html" class="botao">CADASTRO</a>
+        <a href="anonimo.html" class="botao">ENTRAR COMO ANÔNIMO</a>
+    </div>
+</body>
+
+</html>
