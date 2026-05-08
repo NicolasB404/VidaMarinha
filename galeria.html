@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria - Proteção da Vida Marinha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Efeito de Bolhas */
+        .bubbles-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: radial-gradient(circle at 30% 30%, rgba(135, 206, 250, 0.8), rgba(70, 130, 180, 0.4));
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: rise 15s infinite ease-in;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; animation-duration: 12s; animation-delay: 0s; }
+        .bubble:nth-child(2) { width: 60px; height: 60px; left: 20%; animation-duration: 18s; animation-delay: 2s; }
+        .bubble:nth-child(3) { width: 30px; height: 30px; left: 35%; animation-duration: 10s; animation-delay: 4s; }
+        .bubble:nth-child(4) { width: 50px; height: 50px; left: 50%; animation-duration: 16s; animation-delay: 0s; }
+        .bubble:nth-child(5) { width: 35px; height: 35px; left: 65%; animation-duration: 14s; animation-delay: 3s; }
+        .bubble:nth-child(6) { width: 45px; height: 45px; left: 80%; animation-duration: 20s; animation-delay: 5s; }
+        .bubble:nth-child(7) { width: 25px; height: 25px; left: 90%; animation-duration: 11s; animation-delay: 1s; }
+        .bubble:nth-child(8) { width: 55px; height: 55px; left: 15%; animation-duration: 17s; animation-delay: 6s; }
+        .bubble:nth-child(9) { width: 40px; height: 40px; left: 45%; animation-duration: 13s; animation-delay: 2s; }
+        .bubble:nth-child(10) { width: 30px; height: 30px; left: 75%; animation-duration: 15s; animation-delay: 4s; }
+
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                bottom: 1080px;
+                transform: translateX(-100px) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Header e Navegação */
+        .header {
+            background-color: #3a628c;
+            padding: 32px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            flex: 1;
+            justify-content:space-around;
+        }
+
+        .nav-btn {
+            background-color: #5b9bd5;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+        }
+
+        .nav-btn:hover {
+            background-color: #7cb3e2;
+            color: gold;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .shark-logo {
+            width: 140px;
+            height: 140px;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .shark-logo:hover {
+            transform: scale(1.1);
+        }
+
+        /* Conteúdo Principal */
+        .main-content {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: calc(100vh - 180px);
+            position: relative;
+            z-index: 5;
+            backdrop-filter: blur(5px);
+        }
+
+        .page-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 42px;
+            color: #1976d2;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #3a628c;
+            font-size: 18px;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* Área de Upload */
+        .upload-section {
+            background: linear-gradient(135deg, rgba(91, 155, 213, 0.1) 0%, rgba(25, 118, 210, 0.1) 100%);
+            border: 3px dashed #5b9bd5;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-section:hover {
+            background: linear-gradient(135deg, rgba(91, 155, 213, 0.2) 0%, rgba(25, 118, 210, 0.2) 100%);
+            border-color: #1976d2;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(91, 155, 213, 0.3);
+        }
+
+        .upload-icon {
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
+
+        .upload-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 24px;
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .upload-text {
+            color: #3a628c;
+            font-size: 16px;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        /* Grid de Imagens */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            background-color: #e3f2fd;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .gallery-date {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(220, 38, 38, 0.9);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .gallery-item:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .delete-btn:hover {
+            background-color: rgba(220, 38, 38, 1);
+            transform: scale(1.1);
+        }
+
+        /* Modal de Visualização */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .image-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .modal-info {
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .modal-date {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 48px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-modal:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: rotate(90deg);
+        }
+
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 48px;
+            cursor: pointer;
+            padding: 20px;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .nav-arrow:hover {
+            color: #5b9bd5;
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        .prev-arrow {
+            left: 20px;
+        }
+
+        .next-arrow {
+            right: 20px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            color: #3a628c;
+        }
+
+        .empty-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-text {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 1024px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 30px 20px;
+            }
+
+            .nav-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .logo-container {
+                position: relative;
+                left: auto;
+                transform: none;
+                order: -1;
+            }
+
+            .nav-btn {
+                font-size: 22px;
+                padding: 12px 25px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-btn {
+                font-size: 18px;
+                padding: 10px 20px;
+            }
+
+            .shark-logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-arrow {
+                font-size: 32px;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Efeito de Bolhas -->
+    <div class="bubbles-container">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <header class="header">
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn">FORUM</a>
+            <a href="#" class="nav-btn">MAPA</a>
+        </div>
+        
+        <div class="logo-container">
+            <img src="https://i.ibb.co/7dVmxzpb/Captura-de-tela-2026-05-05-102227-1.png"
+                 alt="Logo Preservação da Vida Marinha" 
+                 class="shark-logo">
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="galeria.html" class="nav-btn">GALERIA</a>
+            <button class="nav-btn" onclick="openConfig()">CONFIG</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <h1 class="page-title">Galeria de Imagens</h1>
+        <p class="page-subtitle">Registre e compartilhe a beleza dos oceanos e da vida marinha</p>
+
+        <!-- Área de Upload -->
+        <div class="upload-section" onclick="document.getElementById('fileInput').click()">
+            <div class="upload-icon">📸</div>
+            <div class="upload-title">Adicionar Imagens</div>
+            <div class="upload-text">Clique aqui ou arraste imagens para upload<br>Formatos aceitos: JPG, PNG, WEBP (máx. 10MB)</div>
+            <input type="file" id="fileInput" multiple accept="image/*" onchange="handleFileSelect(event)">
+        </div>
+
+        <!-- Grid de Imagens -->
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Imagens serão inseridas aqui via JavaScript -->
+        </div>
+
+        <!-- Estado Vazio -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <div class="empty-icon">🌊</div>
+            <div class="empty-text">Nenhuma imagem ainda</div>
+            <p>Seja o primeiro a compartilhar fotos da vida marinha!</p>
+        </div>
+    </main>
+
+    <!-- Modal de Visualização -->
+    <div class="image-modal" id="imageModal" onclick="closeModalOnBackground(event)">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <span class="nav-arrow prev-arrow" onclick="changeImage(-1)">&#10094;</span>
+        <span class="nav-arrow next-arrow" onclick="changeImage(1)">&#10095;</span>
+        
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
+            <div class="modal-info">
+                <div class="modal-title" id="modalTitle"></div>
+                <div class="modal-date" id="modalDate"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Array para armazenar as imagens
+        let images = [];
+        let currentIndex = 0;
+
+        // Imagens iniciais de exemplo
+        const defaultImages = [
+            {
+                id: 1,
+                src: 'https://images.unsplash.com/photo-1582967788606-a171f1080ca8?w=800',
+                title: 'Tartaruga Marinha',
+                date: '08/05/2026'
+            },
+            {
+                id: 2,
+                src: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800',
+                title: 'Recife de Coral',
+                date: '08/05/2026'
+            },
+            {
+                id: 3,
+                src: 'https://images.unsplash.com/photo-1560275619-4662e36fa65c?w=800',
+                title: 'Tubarão Baleia',
+                date: '07/05/2026'
+            },
+            {
+                id: 4,
+                src: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800',
+                title: 'Golfinhos',
+                date: '07/05/2026'
+            },
+            {
+                id: 5,
+                src: 'https://images.unsplash.com/photo-1551244072-5d12893278ab?w=800',
+                title: 'Águas-vivas',
+                date: '06/05/2026'
+            },
+            {
+                id: 6,
+                src: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800',
+                title: 'Cavalo-marinho',
+                date: '06/05/2026'
+            }
+        ];
+
+        // Carregar imagens ao iniciar
+        window.onload = function() {
+            // Tentar carregar do localStorage
+            const savedImages = localStorage.getItem('marineGallery');
+            if (savedImages) {
+                images = JSON.parse(savedImages);
+            } else {
+                images = [...defaultImages];
+            }
+            renderGallery();
+        };
+
+        // Lidar com seleção de arquivos
+        function handleFileSelect(event) {
+            const files = event.target.files;
+            
+            if (files.length === 0) return;
+
+            Array.from(files).forEach(file => {
+                if (!file.type.startsWith('image/')) {
+                    alert('Por favor, selecione apenas arquivos de imagem.');
+                    return;
+                }
+
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('A imagem deve ter no máximo 10MB.');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const newImage = {
+                        id: Date.now() + Math.random(),
+                        src: e.target.result,
+                        title: file.name.replace(/\.[^/.]+$/, ""),
+                        date: new Date().toLocaleDateString('pt-BR')
+                    };
+                    images.unshift(newImage);
+                    saveImages();
+                    renderGallery();
+                };
+                reader.readAsDataURL(file);
+            });
+
+            // Limpar input para permitir upload do mesmo arquivo novamente
+            event.target.value = '';
+        }
+
+        // Salvar imagens no localStorage
+        function saveImages() {
+            try {
+                localStorage.setItem('marineGallery', JSON.stringify(images));
+            } catch (e) {
+                alert('Limite de armazenamento atingido. Algumas imagens não puderam ser salvas permanentemente.');
+            }
+        }
+
+        // Renderizar galeria
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            if (images.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            grid.innerHTML = images.map((image, index) => `
+                <div class="gallery-item" onclick="openModal(${index})">
+                    <img src="${image.src}" alt="${image.title}" loading="lazy">
+                    <button class="delete-btn" onclick="deleteImage(event, ${image.id})" title="Excluir imagem">×</button>
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">${image.title}</div>
+                        <div class="gallery-date">${image.date}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Deletar imagem
+        function deleteImage(event, id) {
+            event.stopPropagation();
+            if (confirm('Deseja realmente excluir esta imagem?')) {
+                images = images.filter(img => img.id !== id);
+                saveImages();
+                renderGallery();
+            }
+        }
+
+        // Abrir modal
+        function openModal(index) {
+            currentIndex = index;
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDate = document.getElementById('modalDate');
+
+            modalImg.src = images[currentIndex].src;
+            modalTitle.textContent = images[currentIndex].title;
+            modalDate.textContent = images[currentIndex].date;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Fechar modal
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fechar modal ao clicar no fundo
+        function closeModalOnBackground(event) {
+            if (event.target === event.currentTarget) {
+                closeModal();
+            }
+        }
+
+        // Navegar entre imagens
+        function changeImage(direction) {
+            currentIndex += direction;
+            
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+
+            const modalImg = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDate = document.getElementById('modalDate');
+
+            // Adicionar efeito de fade
+            modalImg.style.opacity = '0';
+            setTimeout(() => {
+                modalImg.src = images[currentIndex].src;
+                modalTitle.textContent = images[currentIndex].title;
+                modalDate.textContent = images[currentIndex].date;
+                modalImg.style.opacity = '1';
+            }, 200);
+        }
+
+        // Navegação com teclado
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById('imageModal');
+            if (!modal.classList.contains('active')) return;
+
+            if (e.key === 'Escape') {
+                closeModal();
+            } else if (e.key === 'ArrowLeft') {
+                changeImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeImage(1);
+            }
+        });
+
+        // Drag and drop
+        const uploadSection = document.querySelector('.upload-section');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadSection.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadSection.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadSection.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            uploadSection.style.borderColor = '#1976d2';
+            uploadSection.style.background = 'linear-gradient(135deg, rgba(91, 155, 213, 0.3) 0%, rgba(25, 118, 210, 0.3) 100%)';
+        }
+
+        function unhighlight(e) {
+            uploadSection.style.borderColor = '#5b9bd5';
+            uploadSection.style.background = 'linear-gradient(135deg, rgba(91, 155, 213, 0.1) 0%, rgba(25, 118, 210, 0.1) 100%)';
+        }
+
+        uploadSection.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            const input = document.getElementById('fileInput');
+            input.files = files;
+            handleFileSelect({ target: input });
+        }
+
+        // Função de configuração (placeholder)
+        function openConfig() {
+            alert('Funcionalidade de configurações em desenvolvimento! 🌊');
+        }
+    </script>
+</body>
+</html>
