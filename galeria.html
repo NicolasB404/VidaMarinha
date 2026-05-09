@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galeria - Proteção da Vida Marinha</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -42,16 +45,85 @@
             box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5);
         }
 
-        .bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; animation-duration: 12s; animation-delay: 0s; }
-        .bubble:nth-child(2) { width: 60px; height: 60px; left: 20%; animation-duration: 18s; animation-delay: 2s; }
-        .bubble:nth-child(3) { width: 30px; height: 30px; left: 35%; animation-duration: 10s; animation-delay: 4s; }
-        .bubble:nth-child(4) { width: 50px; height: 50px; left: 50%; animation-duration: 16s; animation-delay: 0s; }
-        .bubble:nth-child(5) { width: 35px; height: 35px; left: 65%; animation-duration: 14s; animation-delay: 3s; }
-        .bubble:nth-child(6) { width: 45px; height: 45px; left: 80%; animation-duration: 20s; animation-delay: 5s; }
-        .bubble:nth-child(7) { width: 25px; height: 25px; left: 90%; animation-duration: 11s; animation-delay: 1s; }
-        .bubble:nth-child(8) { width: 55px; height: 55px; left: 15%; animation-duration: 17s; animation-delay: 6s; }
-        .bubble:nth-child(9) { width: 40px; height: 40px; left: 45%; animation-duration: 13s; animation-delay: 2s; }
-        .bubble:nth-child(10) { width: 30px; height: 30px; left: 75%; animation-duration: 15s; animation-delay: 4s; }
+        .bubble:nth-child(1) {
+            width: 40px;
+            height: 40px;
+            left: 10%;
+            animation-duration: 12s;
+            animation-delay: 0s;
+        }
+
+        .bubble:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            left: 20%;
+            animation-duration: 18s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 30px;
+            height: 30px;
+            left: 35%;
+            animation-duration: 10s;
+            animation-delay: 4s;
+        }
+
+        .bubble:nth-child(4) {
+            width: 50px;
+            height: 50px;
+            left: 50%;
+            animation-duration: 16s;
+            animation-delay: 0s;
+        }
+
+        .bubble:nth-child(5) {
+            width: 35px;
+            height: 35px;
+            left: 65%;
+            animation-duration: 14s;
+            animation-delay: 3s;
+        }
+
+        .bubble:nth-child(6) {
+            width: 45px;
+            height: 45px;
+            left: 80%;
+            animation-duration: 20s;
+            animation-delay: 5s;
+        }
+
+        .bubble:nth-child(7) {
+            width: 25px;
+            height: 25px;
+            left: 90%;
+            animation-duration: 11s;
+            animation-delay: 1s;
+        }
+
+        .bubble:nth-child(8) {
+            width: 55px;
+            height: 55px;
+            left: 15%;
+            animation-duration: 17s;
+            animation-delay: 6s;
+        }
+
+        .bubble:nth-child(9) {
+            width: 40px;
+            height: 40px;
+            left: 45%;
+            animation-duration: 13s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(10) {
+            width: 30px;
+            height: 30px;
+            left: 75%;
+            animation-duration: 15s;
+            animation-delay: 4s;
+        }
 
         @keyframes rise {
             0% {
@@ -59,9 +131,11 @@
                 transform: translateX(0) scale(1);
                 opacity: 0.3;
             }
+
             50% {
                 opacity: 0.5;
             }
+
             100% {
                 bottom: 1080px;
                 transform: translateX(-100px) scale(1.2);
@@ -76,7 +150,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
             z-index: 10;
         }
@@ -86,7 +160,7 @@
             gap: 25px;
             align-items: center;
             flex: 1;
-            justify-content:space-around;
+            justify-content: space-around;
         }
 
         .nav-btn {
@@ -100,7 +174,7 @@
             font-weight: 700;
             letter-spacing: 2px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-transform: uppercase;
             cursor: pointer;
             border: none;
@@ -110,7 +184,7 @@
             background-color: #7cb3e2;
             color: gold;
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         .logo-container {
@@ -123,7 +197,7 @@
         .shark-logo {
             width: 140px;
             height: 140px;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
             transition: transform 0.3s ease;
         }
 
@@ -213,7 +287,7 @@
             position: relative;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
             aspect-ratio: 4/3;
             cursor: pointer;
@@ -222,7 +296,7 @@
 
         .gallery-item:hover {
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
         }
 
         .gallery-item img {
@@ -241,7 +315,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
             padding: 20px;
             color: white;
             transform: translateY(100%);
@@ -321,7 +395,7 @@
             max-width: 100%;
             max-height: 85vh;
             border-radius: 10px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
         .modal-info {
@@ -358,7 +432,7 @@
         }
 
         .close-modal:hover {
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(255, 255, 255, 0.1);
             transform: rotate(90deg);
         }
 
@@ -405,62 +479,203 @@
             margin-bottom: 10px;
         }
 
-        /* Responsividade */
-        @media (max-width: 1024px) {
-            .header {
-                flex-direction: column;
-                gap: 20px;
-                padding: 30px 20px;
-            }
-
-            .nav-buttons {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .logo-container {
-                position: relative;
-                left: auto;
-                transform: none;
-                order: -1;
-            }
-
-            .nav-btn {
-                font-size: 22px;
-                padding: 12px 25px;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
+        .config-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
         }
 
-        @media (max-width: 600px) {
-            .nav-btn {
-                font-size: 18px;
-                padding: 10px 20px;
-            }
+        .config-modal.active {
+            display: flex;
+        }
 
-            .shark-logo {
-                width: 100px;
-                height: 100px;
-            }
+        .config-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            border: 3px solid #5b9bd5;
+        }
 
-            .page-title {
-                font-size: 28px;
-            }
+        .config-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #5b9bd5;
+        }
 
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
+        .config-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 32px;
+            color: #1976d2;
+            text-transform: uppercase;
+        }
 
-            .nav-arrow {
-                font-size: 32px;
-                padding: 10px;
-            }
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 36px;
+            color: #1976d2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-btn:hover {
+            background-color: #5b9bd5;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .config-section {
+            margin-bottom: 30px;
+        }
+
+        .config-section-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 22px;
+            color: #3a628c;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .config-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: rgba(91, 155, 213, 0.1);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .config-option:hover {
+            background-color: rgba(91, 155, 213, 0.2);
+            transform: translateX(5px);
+        }
+
+        .config-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: #3a628c;
+            font-weight: 600;
+        }
+
+        .config-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .config-toggle.active {
+            background-color: #5b9bd5;
+        }
+
+        .config-toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .config-toggle.active .config-toggle-slider {
+            transform: translateX(30px);
+        }
+
+        .config-select {
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 2px solid #5b9bd5;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: #3a628c;
+            background-color: white;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .config-select:hover,
+        .config-select:focus {
+            box-shadow: 0 0 10px rgba(91, 155, 213, 0.5);
+        }
+
+        .config-slider {
+            width: 150px;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to right, #5b9bd5, #1976d2);
+            outline: none;
+        }
+
+        .config-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #1976d2;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #5b9bd5 0%, #1976d2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.4);
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.6);
+            background: linear-gradient(135deg, #7cb3e2 0%, #42a5f5 100%);
         }
     </style>
 </head>
+
 <body>
     <!-- Efeito de Bolhas -->
     <div class="bubbles-container">
@@ -478,16 +693,15 @@
 
     <header class="header">
         <div class="nav-buttons">
-            <a href="index.html" class="nav-btn">FORUM</a>
+            <a href="#" class="nav-btn">FORUM</a>
             <a href="#" class="nav-btn">MAPA</a>
         </div>
-        
+
         <div class="logo-container">
-            <img src="https://i.ibb.co/7dVmxzpb/Captura-de-tela-2026-05-05-102227-1.png"
-                 alt="Logo Preservação da Vida Marinha" 
-                 class="shark-logo">
+            <a href="inicial.html"><img src="https://i.ibb.co/7dVmxzpb/Captura-de-tela-2026-05-05-102227-1.png"
+                alt="Logo Preservação da Vida Marinha" class="shark-logo"></a>
         </div>
-        
+
         <div class="nav-buttons">
             <a href="galeria.html" class="nav-btn">GALERIA</a>
             <button class="nav-btn" onclick="openConfig()">CONFIG</button>
@@ -502,7 +716,8 @@
         <div class="upload-section" onclick="document.getElementById('fileInput').click()">
             <div class="upload-icon">📸</div>
             <div class="upload-title">Adicionar Imagens</div>
-            <div class="upload-text">Clique aqui ou arraste imagens para upload<br>Formatos aceitos: JPG, PNG, WEBP (máx. 10MB)</div>
+            <div class="upload-text">Clique aqui ou arraste imagens para upload<br>Formatos aceitos: JPG, PNG, WEBP
+                (máx. 10MB)</div>
             <input type="file" id="fileInput" multiple accept="image/*" onchange="handleFileSelect(event)">
         </div>
 
@@ -524,13 +739,98 @@
         <span class="close-modal" onclick="closeModal()">&times;</span>
         <span class="nav-arrow prev-arrow" onclick="changeImage(-1)">&#10094;</span>
         <span class="nav-arrow next-arrow" onclick="changeImage(1)">&#10095;</span>
-        
+
         <div class="modal-content">
             <img id="modalImage" src="" alt="">
             <div class="modal-info">
                 <div class="modal-title" id="modalTitle"></div>
                 <div class="modal-date" id="modalDate"></div>
             </div>
+        </div>
+    </div>
+
+    <div class="config-modal" id="configModal">
+        <div class="config-content">
+            <div class="config-header">
+                <h2 class="config-title">Configurações</h2>
+                <button class="close-btn" onclick="closeConfig()">&times;</button>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Aparência</h3>
+                <div class="config-option">
+                    <span class="config-label">Modo Escuro</span>
+                    <div class="config-toggle" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Tamanho da Fonte</span>
+                    <input type="range" class="config-slider" min="12" max="24" value="18">
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Tema</span>
+                    <select class="config-select">
+                        <option>Oceano Azul</option>
+                        <option>Mar Tropical</option>
+                        <option>Águas Profundas</option>
+                        <option>Recife de Coral</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Notificações</h3>
+                <div class="config-option">
+                    <span class="config-label">Alertas de Conservação</span>
+                    <div class="config-toggle active" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Novidades do Fórum</span>
+                    <div class="config-toggle active" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Atualizações de Mapas</span>
+                    <div class="config-toggle" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Privacidade</h3>
+                <div class="config-option">
+                    <span class="config-label">Perfil Público</span>
+                    <div class="config-toggle active" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Mostrar Localização</span>
+                    <div class="config-toggle" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Idioma</h3>
+                <div class="config-option">
+                    <span class="config-label">Idioma Principal</span>
+                    <select class="config-select">
+                        <option>Português (Brasil)</option>
+                        <option>English</option>
+                        <option>Español</option>
+                        <option>Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="save-btn" onclick="saveConfig()">Salvar Configurações</button>
         </div>
     </div>
 
@@ -543,44 +843,38 @@
         const defaultImages = [
             {
                 id: 1,
-                src: 'https://images.unsplash.com/photo-1582967788606-a171f1080ca8?w=800',
-                title: 'Tartaruga Marinha',
+                src: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800',
+                title: 'Mergulhador',
                 date: '08/05/2026'
             },
             {
                 id: 2,
-                src: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800',
-                title: 'Recife de Coral',
-                date: '08/05/2026'
+                src: 'https://images.unsplash.com/photo-1560275619-4662e36fa65c?w=800',
+                title: 'Tubarão',
+                date: '07/05/2026'
             },
             {
                 id: 3,
-                src: 'https://images.unsplash.com/photo-1560275619-4662e36fa65c?w=800',
-                title: 'Tubarão Baleia',
+                src: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800',
+                title: 'Tartaruga',
                 date: '07/05/2026'
             },
             {
                 id: 4,
-                src: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=800',
-                title: 'Golfinhos',
-                date: '07/05/2026'
-            },
-            {
-                id: 5,
                 src: 'https://images.unsplash.com/photo-1551244072-5d12893278ab?w=800',
-                title: 'Águas-vivas',
+                title: 'Recife de Coral 1',
                 date: '06/05/2026'
             },
             {
-                id: 6,
+                id: 5,
                 src: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800',
-                title: 'Cavalo-marinho',
+                title: 'Recife de Coral 2',
                 date: '06/05/2026'
             }
         ];
 
         // Carregar imagens ao iniciar
-        window.onload = function() {
+        window.onload = function () {
             // Tentar carregar do localStorage
             const savedImages = localStorage.getItem('marineGallery');
             if (savedImages) {
@@ -594,7 +888,7 @@
         // Lidar com seleção de arquivos
         function handleFileSelect(event) {
             const files = event.target.files;
-            
+
             if (files.length === 0) return;
 
             Array.from(files).forEach(file => {
@@ -609,7 +903,7 @@
                 }
 
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     const newImage = {
                         id: Date.now() + Math.random(),
                         src: e.target.result,
@@ -681,7 +975,7 @@
             modalImg.src = images[currentIndex].src;
             modalTitle.textContent = images[currentIndex].title;
             modalDate.textContent = images[currentIndex].date;
-            
+
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -703,7 +997,7 @@
         // Navegar entre imagens
         function changeImage(direction) {
             currentIndex += direction;
-            
+
             if (currentIndex < 0) {
                 currentIndex = images.length - 1;
             } else if (currentIndex >= images.length) {
@@ -725,7 +1019,7 @@
         }
 
         // Navegação com teclado
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             const modal = document.getElementById('imageModal');
             if (!modal.classList.contains('active')) return;
 
@@ -773,16 +1067,50 @@
         function handleDrop(e) {
             const dt = e.dataTransfer;
             const files = dt.files;
-            
+
             const input = document.getElementById('fileInput');
             input.files = files;
             handleFileSelect({ target: input });
         }
 
-        // Função de configuração (placeholder)
+        // Abrir modal de configuração
         function openConfig() {
-            alert('Funcionalidade de configurações em desenvolvimento! 🌊');
+            document.getElementById('configModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
+
+        // Fechar modal de configuração
+        function closeConfig() {
+            document.getElementById('configModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Fechar modal ao clicar fora
+        document.getElementById('configModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeConfig();
+            }
+        });
+
+        // Toggle switch
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+        }
+
+        // Salvar configurações
+        function saveConfig() {
+            // Aqui você pode adicionar a lógica para salvar as configurações
+            alert('Configurações salvas com sucesso! 🌊');
+            closeConfig();
+        }
+
+        // Fechar modal com a tecla ESC
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeConfig();
+            }
+        });
     </script>
 </body>
+
 </html>
