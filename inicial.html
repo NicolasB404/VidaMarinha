@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proteção da Vida Marinha - Protegendo o Futuro dos Oceanos</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -42,16 +45,85 @@
             box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5);
         }
 
-        .bubble:nth-child(1) { width: 40px; height: 40px; left: 10%; animation-duration: 12s; animation-delay: 0s; }
-        .bubble:nth-child(2) { width: 60px; height: 60px; left: 20%; animation-duration: 18s; animation-delay: 2s; }
-        .bubble:nth-child(3) { width: 30px; height: 30px; left: 35%; animation-duration: 10s; animation-delay: 4s; }
-        .bubble:nth-child(4) { width: 50px; height: 50px; left: 50%; animation-duration: 16s; animation-delay: 0s; }
-        .bubble:nth-child(5) { width: 35px; height: 35px; left: 65%; animation-duration: 14s; animation-delay: 3s; }
-        .bubble:nth-child(6) { width: 45px; height: 45px; left: 80%; animation-duration: 20s; animation-delay: 5s; }
-        .bubble:nth-child(7) { width: 25px; height: 25px; left: 90%; animation-duration: 11s; animation-delay: 1s; }
-        .bubble:nth-child(8) { width: 55px; height: 55px; left: 15%; animation-duration: 17s; animation-delay: 6s; }
-        .bubble:nth-child(9) { width: 40px; height: 40px; left: 45%; animation-duration: 13s; animation-delay: 2s; }
-        .bubble:nth-child(10) { width: 30px; height: 30px; left: 75%; animation-duration: 15s; animation-delay: 4s; }
+        .bubble:nth-child(1) {
+            width: 40px;
+            height: 40px;
+            left: 10%;
+            animation-duration: 12s;
+            animation-delay: 0s;
+        }
+
+        .bubble:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            left: 20%;
+            animation-duration: 18s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 30px;
+            height: 30px;
+            left: 35%;
+            animation-duration: 10s;
+            animation-delay: 4s;
+        }
+
+        .bubble:nth-child(4) {
+            width: 50px;
+            height: 50px;
+            left: 50%;
+            animation-duration: 16s;
+            animation-delay: 0s;
+        }
+
+        .bubble:nth-child(5) {
+            width: 35px;
+            height: 35px;
+            left: 65%;
+            animation-duration: 14s;
+            animation-delay: 3s;
+        }
+
+        .bubble:nth-child(6) {
+            width: 45px;
+            height: 45px;
+            left: 80%;
+            animation-duration: 20s;
+            animation-delay: 5s;
+        }
+
+        .bubble:nth-child(7) {
+            width: 25px;
+            height: 25px;
+            left: 90%;
+            animation-duration: 11s;
+            animation-delay: 1s;
+        }
+
+        .bubble:nth-child(8) {
+            width: 55px;
+            height: 55px;
+            left: 15%;
+            animation-duration: 17s;
+            animation-delay: 6s;
+        }
+
+        .bubble:nth-child(9) {
+            width: 40px;
+            height: 40px;
+            left: 45%;
+            animation-duration: 13s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(10) {
+            width: 30px;
+            height: 30px;
+            left: 75%;
+            animation-duration: 15s;
+            animation-delay: 4s;
+        }
 
         @keyframes rise {
             0% {
@@ -59,9 +131,11 @@
                 transform: translateX(0) scale(1);
                 opacity: 0.3;
             }
+
             50% {
                 opacity: 0.5;
             }
+
             100% {
                 bottom: 1080px;
                 transform: translateX(-100px) scale(1.2);
@@ -76,7 +150,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
             z-index: 10;
         }
@@ -86,7 +160,7 @@
             gap: 25px;
             align-items: center;
             flex: 1;
-            justify-content:space-around;
+            justify-content: space-around;
         }
 
         .nav-btn {
@@ -100,7 +174,7 @@
             font-weight: 700;
             letter-spacing: 2px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-transform: uppercase;
             cursor: pointer;
             border: none;
@@ -110,7 +184,7 @@
             background-color: #7cb3e2;
             color: gold;
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
         .logo-container {
@@ -123,7 +197,7 @@
         .shark-logo {
             width: 140px;
             height: 140px;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
             transition: transform 0.3s ease;
         }
 
@@ -314,7 +388,7 @@
             background-color: white;
             border-radius: 50%;
             transition: transform 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .config-toggle.active .config-toggle-slider {
@@ -334,7 +408,8 @@
             transition: all 0.3s ease;
         }
 
-        .config-select:hover, .config-select:focus {
+        .config-select:hover,
+        .config-select:focus {
             box-shadow: 0 0 10px rgba(91, 155, 213, 0.5);
         }
 
@@ -354,7 +429,7 @@
             border-radius: 50%;
             background: #1976d2;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .save-btn {
@@ -380,9 +455,68 @@
             box-shadow: 0 6px 20px rgba(25, 118, 210, 0.6);
             background: linear-gradient(135deg, #7cb3e2 0%, #42a5f5 100%);
         }
-        
+
+        /* Responsividade */
+        @media (max-width: 1024px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                padding: 30px 20px;
+            }
+
+            .nav-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .logo-container {
+                position: relative;
+                left: auto;
+                transform: none;
+                order: -1;
+            }
+
+            .nav-btn {
+                font-size: 22px;
+                padding: 12px 25px;
+            }
+
+            .main-title {
+                font-size: 28px;
+            }
+
+            .content-text,
+            .section-item {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-btn {
+                font-size: 18px;
+                padding: 10px 20px;
+            }
+
+            .shark-logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .main-title {
+                font-size: 22px;
+            }
+
+            .config-content {
+                padding: 25px;
+            }
+
+            .config-title {
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <!-- Efeito de Bolhas -->
     <div class="bubbles-container">
@@ -403,15 +537,14 @@
             <a href="#" class="nav-btn">FORUM</a>
             <a href="#" class="nav-btn">MAPA</a>
         </div>
-        
+
         <div class="logo-container">
-            <img src="https://i.ibb.co/7dVmxzpb/Captura-de-tela-2026-05-05-102227-1.png"
-                 alt="Logo Preservação da Vida Marinha" 
-                 class="shark-logo">
+            <a href="inicial.html"><img src="https://i.ibb.co/7dVmxzpb/Captura-de-tela-2026-05-05-102227-1.png"
+                    alt="Logo Preservação da Vida Marinha" class="shark-logo"></a>
         </div>
-        
+
         <div class="nav-buttons">
-            <a href="#" class="nav-btn">GALERIA</a>
+            <a href="galeria.html" class="nav-btn">GALERIA</a>
             <button class="nav-btn" onclick="openConfig()">CONFIG</button>
         </div>
     </header>
@@ -424,11 +557,15 @@
 
         <div class="content-text">
             <p>
-                OS OCEANOS COBREM MAIS DE 70% DO NOSSO PLANETA E SÃO O LAR DE UMA INCRÍVEL DIVERSIDADE DE VIDA MARINHA. NO ENTANTO, RECIFES DE CORAL, BALEIAS, TARTARUGAS, GOLFINHOS E MILHARES DE ESPÉCIES ENFRENTAM AMEAÇAS CRESCENTES: POLUIÇÃO, PESCA PREDATÓRIA, MUDANÇAS CLIMÁTICAS E DESTRUIÇÃO DE HABITATS.
+                OS OCEANOS COBREM MAIS DE 70% DO NOSSO PLANETA E SÃO O LAR DE UMA INCRÍVEL DIVERSIDADE DE VIDA MARINHA.
+                NO ENTANTO, RECIFES DE CORAL, BALEIAS, TARTARUGAS, GOLFINHOS E MILHARES DE ESPÉCIES ENFRENTAM AMEAÇAS
+                CRESCENTES: POLUIÇÃO, PESCA PREDATÓRIA, MUDANÇAS CLIMÁTICAS E DESTRUIÇÃO DE HABITATS.
             </p>
             <br>
             <p>
-                O [NOME DO SITE] NASCEU PARA MUDAR ESSA REALIDADE. SOMOS UMA PLATAFORMA DEDICADA À PROTEÇÃO E CONSERVAÇÃO DA VIDA MARINHA, REUNINDO APAIXONADOS PELO MAR, CIENTISTAS, MERGULHADORES, ATIVISTAS E CIDADÃOS CONSCIENTES EM UM SÓ LUGAR.
+                O PROTEÇÃO DA VIDA MARINHA NASCEU PARA MUDAR ESSA REALIDADE. SOMOS UMA PLATAFORMA DEDICADA À PROTEÇÃO E
+                CONSERVAÇÃO DA VIDA MARINHA, REUNINDO APAIXONADOS PELO MAR, CIENTISTAS, MERGULHADORES, ATIVISTAS E
+                CIDADÃOS CONSCIENTES EM UM SÓ LUGAR.
             </p>
             <br>
             <p>AQUI VOCÊ ENCONTRA:</p>
@@ -436,13 +573,16 @@
 
         <div class="section-list">
             <div class="section-item">
-                <strong>FÓRUM</strong> – UM ESPAÇO VIVO PARA TROCAR CONHECIMENTOS, EXPERIÊNCIAS, ALERTAS E IDEIAS SOBRE CONSERVAÇÃO MARINHA.
+                <strong>FÓRUM</strong> – UM ESPAÇO VIVO PARA TROCAR CONHECIMENTOS, EXPERIÊNCIAS, ALERTAS E IDEIAS SOBRE
+                CONSERVAÇÃO MARINHA.
             </div>
             <div class="section-item">
-                <strong>GALERIA</strong> – UM ACERVO INSPIRADOR DE FOTOS E VÍDEOS DA VIDA MARINHA, REGISTRANDO A BELEZA DOS OCEANOS E TAMBÉM AS AMEAÇAS QUE ELES ENFRENTAM.
+                <strong>GALERIA</strong> – UM ACERVO INSPIRADOR DE FOTOS E VÍDEOS DA VIDA MARINHA, REGISTRANDO A BELEZA
+                DOS OCEANOS E TAMBÉM AS AMEAÇAS QUE ELES ENFRENTAM.
             </div>
             <div class="section-item">
-                <strong>MAPAS DE VIDA MARINHA</strong> – FERRAMENTAS INTERATIVAS QUE MOSTRAM AVISTAMENTOS, ÁREAS DE REPRODUÇÃO, MIGRAÇÕES E HOTSPOTS DE BIODIVERSIDADE.
+                <strong>MAPAS DE VIDA MARINHA</strong> – FERRAMENTAS INTERATIVAS QUE MOSTRAM AVISTAMENTOS, ÁREAS DE
+                REPRODUÇÃO, MIGRAÇÕES E HOTSPOTS DE BIODIVERSIDADE.
             </div>
         </div>
     </main>
@@ -547,7 +687,7 @@
         }
 
         // Fechar modal ao clicar fora
-        document.getElementById('configModal').addEventListener('click', function(e) {
+        document.getElementById('configModal').addEventListener('click', function (e) {
             if (e.target === this) {
                 closeConfig();
             }
@@ -566,11 +706,12 @@
         }
 
         // Fechar modal com a tecla ESC
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 closeConfig();
             }
         });
     </script>
 </body>
+
 </html>
