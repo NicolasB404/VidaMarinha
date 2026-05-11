@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conta Salva - Teste</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Roboto', sans-serif;
+            color: white;
+            background: linear-gradient(rgba(0, 30, 60, 0.85), rgba(0, 30, 60, 0.85)), 
+                        url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920&q=80') center/cover no-repeat;
+            overflow-y: auto;
+        }
+
+        .container {
+            background: rgba(0, 183, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 40px 35px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.4);
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            text-align: left;
+            margin: 25px 0;
+            line-height: 2.2;
+        }
+
+        .info p {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .label {
+            font-weight: 500;
+            color: #00d4ff;
+            font-size: 14px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #0074d9, #00a8e8);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 116, 217, 0.5);
+        }
+
+        .clear-btn {
+            background: #ff4757;
+        }
+
+        .clear-btn:hover {
+            background: #ff3742;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Conta Salva</h1>
+        <p style="color: rgba(255,255,255,0.8); margin-bottom: 30px;">Dados do localStorage</p>
+
+        <img id="fotoPerfil" class="profile-img" src="https://i.ibb.co/7dVmxzpb/Captura-de-tela-2026-05-05-102227-1.png" alt="Foto de Perfil">
+
+        <div class="info">
+            <p><span class="label">Nome:</span><br> <span id="nomeDisplay">-</span></p>
+            <p><span class="label">E-mail:</span><br> <span id="emailDisplay">-</span></p>
+            <p><span class="label">Senha:</span><br> <span id="senhaDisplay">-</span></p>
+            <p><span class="label">Data de Cadastro:</span><br> <span id="dataDisplay">-</span></p>
+        </div>
+
+        <button class="btn" onclick="window.location.href = 'cadastro.html'">Voltar para Cadastro</button>
+        <button class="btn clear-btn" onclick="limparDados()">Limpar Dados (localStorage)</button>
+    </div>
+
+    <script>
+        function carregarDados() {
+            const userData = localStorage.getItem('usuarioCadastrado');
+
+            if (userData) {
+                const usuario = JSON.parse(userData);
+
+                document.getElementById('nomeDisplay').textContent = usuario.nome || '-';
+                document.getElementById('emailDisplay').textContent = usuario.email || '-';
+                document.getElementById('senhaDisplay').textContent = usuario.password ? '••••••••' : '-';
+                document.getElementById('dataDisplay').textContent = new Date(usuario.dataCadastro).toLocaleString('pt-BR');
+
+                // Carrega a foto
+                if (usuario.fotoPerfil) {
+                    document.getElementById('fotoPerfil').src = usuario.fotoPerfil;
+                }
+            } else {
+                document.getElementById('nomeDisplay').textContent = "Nenhum cadastro encontrado";
+            }
+        }
+
+        function limparDados() {
+            if (confirm("Tem certeza que deseja apagar todos os dados salvos?")) {
+                localStorage.removeItem('usuarioCadastrado');
+                alert("Dados apagados com sucesso!");
+                carregarDados();
+            }
+        }
+
+        // Carrega os dados ao abrir a página
+        window.onload = carregarDados;
+    </script>
+</body>
+</html>
