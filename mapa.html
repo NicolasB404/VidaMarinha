@@ -1,0 +1,799 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa - Proteção da Vida Marinha</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Header e Navegação */
+        .header {
+            background-color: #3a628c;
+            padding: 32px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            flex: 1;
+            justify-content: space-around;
+        }
+
+        .nav-btn {
+            background-color: #5b9bd5;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+        }
+
+        .nav-btn:hover {
+            background-color: #7cb3e2;
+            color: gold;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .shark-logo {
+            width: 140px;
+            height: 140px;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .shark-logo:hover {
+            transform: scale(1.1);
+        }
+
+        /* Navegação de Espécies */
+        .species-nav {
+            background-color: #5b9bd5;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 9;
+            position: relative;
+        }
+
+        .species-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            padding: 10px 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .species-btn:hover {
+            color: gold;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .species-btn.active {
+            color: gold;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Conteúdo Principal */
+        .main-content {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: calc(100vh - 280px);
+            position: relative;
+            z-index: 5;
+            backdrop-filter: blur(5px);
+        }
+
+        .page-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 42px;
+            color: #1976d2;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: #3a628c;
+            font-size: 18px;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* Área do Mapa */
+        .map-container {
+            background: linear-gradient(135deg, rgba(91, 155, 213, 0.1) 0%, rgba(25, 118, 210, 0.1) 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .map-species-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 36px;
+            color: #1976d2;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .map-scientific-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #3a628c;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .map-description {
+            font-size: 16px;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .map-image-wrapper {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            background-color: white;
+            margin-bottom: 30px;
+        }
+
+        .map-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .map-image-wrapper:hover .map-image {
+            transform: scale(1.02);
+        }
+
+        /* Informações Adicionais */
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, rgba(91, 155, 213, 0.1) 0%, rgba(25, 118, 210, 0.1) 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #5b9bd5;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(91, 155, 213, 0.3);
+            border-left-color: #1976d2;
+        }
+
+        .info-card-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 22px;
+            color: #1976d2;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .info-card-text {
+            font-size: 15px;
+            color: #3a628c;
+            line-height: 1.6;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-list li {
+            padding: 8px 0;
+            color: #3a628c;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .info-list li:before {
+            content: "🌊";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Config Modal */
+        .config-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .config-modal.active {
+            display: flex;
+        }
+
+        .config-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            border: 3px solid #5b9bd5;
+        }
+
+        .config-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #5b9bd5;
+        }
+
+        .config-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 32px;
+            color: #1976d2;
+            text-transform: uppercase;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 36px;
+            color: #1976d2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-btn:hover {
+            background-color: #5b9bd5;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .config-section {
+            margin-bottom: 30px;
+        }
+
+        .config-section-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 22px;
+            color: #3a628c;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .config-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: rgba(91, 155, 213, 0.1);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .config-option:hover {
+            background-color: rgba(91, 155, 213, 0.2);
+            transform: translateX(5px);
+        }
+
+        .config-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: #3a628c;
+            font-weight: 600;
+        }
+
+        .config-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .config-toggle.active {
+            background-color: #5b9bd5;
+        }
+
+        .config-toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .config-toggle.active .config-toggle-slider {
+            transform: translateX(30px);
+        }
+
+        .config-select {
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 2px solid #5b9bd5;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: #3a628c;
+            background-color: white;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .config-select:hover,
+        .config-select:focus {
+            box-shadow: 0 0 10px rgba(91, 155, 213, 0.5);
+        }
+
+        .config-slider {
+            width: 150px;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to right, #5b9bd5, #1976d2);
+            outline: none;
+        }
+
+        .config-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #1976d2;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #5b9bd5 0%, #1976d2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.4);
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.6);
+            background: linear-gradient(135deg, #7cb3e2 0%, #42a5f5 100%);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="nav-buttons">
+            <a href="forum.html" class="nav-btn">FORUM</a>
+            <a href="mapa.html" class="nav-btn">MAPA</a>
+        </div>
+
+        <div class="logo-container">
+            <a href="inicial.html"><img src="https://i.ibb.co/7dVmxzpb/Captura-de-tela-2026-05-05-102227-1.png"
+                    alt="Logo Preservação da Vida Marinha" class="shark-logo"></a>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="galeria.html" class="nav-btn">GALERIA</a>
+            <button class="nav-btn" onclick="openConfig()">CONFIG</button>
+        </div>
+    </header>
+
+    <!-- Navegação de Espécies -->
+    <nav class="species-nav">
+        <button class="species-btn active" onclick="changeSpecies('baleia')">Tubarão Baleia</button>
+        <button class="species-btn" onclick="changeSpecies('limao')">Tubarão Limão</button>
+        <button class="species-btn" onclick="changeSpecies('raposa')">Tubarão Raposa</button>
+    </nav>
+
+    <main class="main-content">
+        <h1 class="page-title">Mapas de Distribuição</h1>
+        <p class="page-subtitle">Explore as áreas de ocorrência e migração das espécies marinhas</p>
+
+        <!-- Container do Mapa -->
+        <div class="map-container">
+            <div class="map-header">
+                <h2 class="map-species-title" id="speciesTitle">Tubarão Baleia</h2>
+                <p class="map-scientific-name" id="scientificName">Rhincodon typus</p>
+                <p class="map-description" id="speciesDescription">
+                    O tubarão-baleia é o maior peixe do mundo e pode ser encontrado em oceanos tropicais e 
+                    subtropicais. São conhecidos por suas migrações sazonais em busca de alimento e 
+                    temperaturas ideais.
+                </p>
+            </div>
+
+            <div class="map-image-wrapper">
+                <img src="https://i.ibb.co/9mGMRYGQ/Negaprion-brevirostris-distribution-map.png" 
+                     alt="Mapa de Distribuição" 
+                     class="map-image" 
+                     id="mapImage">
+            </div>
+
+
+
+        <!-- Informações Adicionais -->
+        <div class="info-section">
+            <div class="info-card">
+                <h3 class="info-card-title">📍 Habitat</h3>
+                <ul class="info-list" id="habitatInfo">
+                    <li>Águas tropicais e subtropicais</li>
+                    <li>Temperatura: 21-25°C</li>
+                    <li>Profundidade: 0-700m</li>
+                    <li>Próximo a recifes de coral</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3 class="info-card-title"> Características</h3>
+                <ul class="info-list" id="characteristicsInfo">
+                    <li>Maior peixe do mundo</li>
+                    <li>Até 18 metros de comprimento</li>
+                    <li>Peso: até 21 toneladas</li>
+                    <li>Alimentação: filtrador (plâncton)</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3 class="info-card-title">⚠️ Status de Conservação</h3>
+                <ul class="info-list" id="conservationInfo">
+                    <li>Em perigo (EN)</li>
+                    <li>População em declínio</li>
+                    <li>Ameaças: pesca, colisões</li>
+                    <li>Protegido em várias regiões</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Configuração -->
+    <div class="config-modal" id="configModal">
+        <div class="config-content">
+            <div class="config-header">
+                <h2 class="config-title">Configurações</h2>
+                <button class="close-btn" onclick="closeConfig()">&times;</button>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Aparência</h3>
+                <div class="config-option">
+                    <span class="config-label">Modo Escuro</span>
+                    <div class="config-toggle" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Tamanho da Fonte</span>
+                    <input type="range" class="config-slider" min="12" max="24" value="18">
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Tema</span>
+                    <select class="config-select">
+                        <option>Oceano Azul</option>
+                        <option>Mar Tropical</option>
+                        <option>Águas Profundas</option>
+                        <option>Recife de Coral</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Notificações</h3>
+                <div class="config-option">
+                    <span class="config-label">Alertas de Conservação</span>
+                    <div class="config-toggle active" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Novidades do Fórum</span>
+                    <div class="config-toggle active" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Atualizações de Mapas</span>
+                    <div class="config-toggle" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Privacidade</h3>
+                <div class="config-option">
+                    <span class="config-label">Perfil Público</span>
+                    <div class="config-toggle active" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Mostrar Localização</span>
+                    <div class="config-toggle" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Idioma</h3>
+                <div class="config-option">
+                    <span class="config-label">Idioma Principal</span>
+                    <select class="config-select">
+                        <option>Português (Brasil)</option>
+                        <option>English</option>
+                        <option>Español</option>
+                        <option>Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="save-btn" onclick="saveConfig()">Salvar Configurações</button>
+        </div>
+    </div>
+
+    <script>
+        // Dados das espécies
+        const speciesData = {
+            baleia: {
+                title: 'Tubarão Baleia',
+                scientific: 'Rhincodon typus',
+                description: 'O tubarão-baleia é o maior peixe do mundo e pode ser encontrado em oceanos tropicais e subtropicais. São conhecidos por suas migrações sazonais em busca de alimento e temperaturas ideais.',
+                mapImage: 'https://i.ibb.co/9mGMRYGQ/Negaprion-brevirostris-distribution-map.png',
+                habitat: [
+                    'Águas tropicais e subtropicais',
+                    'Temperatura: 21-25°C',
+                    'Profundidade: 0-700m',
+                    'Próximo a recifes de coral'
+                ],
+                characteristics: [
+                    'Maior peixe do mundo',
+                    'Até 18 metros de comprimento',
+                    'Peso: até 21 toneladas',
+                    'Alimentação: filtrador (plâncton)'
+                ],
+                conservation: [
+                    'Em perigo (EN)',
+                    'População em declínio',
+                    'Ameaças: pesca, colisões',
+                    'Protegido em várias regiões'
+                ]
+            },
+            limao: {
+                title: 'Tubarão Limão',
+                scientific: 'Negaprion brevirostris',
+                description: 'O tubarão-limão é encontrado em águas costeiras rasas e é conhecido por sua coloração amarelada. São comuns em manguezais e recifes de coral do Atlântico ocidental.',
+                mapImage: 'https://i.ibb.co/RTK4NF0f/300083-lemon-shark-negaprion-brevirostris-distmap.webp',
+                habitat: [
+                    'Águas costeiras rasas',
+                    'Manguezais e estuários',
+                    'Temperatura: 22-28°C',
+                    'Profundidade: 0-90m'
+                ],
+                characteristics: [
+                    'Coloração amarelada característica',
+                    'Até 3,4 metros de comprimento',
+                    'Peso: até 180 kg',
+                    'Alimentação: peixes e raias'
+                ],
+                conservation: [
+                    'Quase ameaçado (NT)',
+                    'População estável',
+                    'Ameaças: pesca esportiva',
+                    'Protegido em algumas áreas'
+                ]
+            },
+            raposa: {
+                title: 'Tubarão Raposa',
+                scientific: 'Alopias vulpinus',
+                description: 'O tubarão-raposa é famoso por sua cauda longa, que pode representar metade do seu comprimento total. Usam a cauda para atordoar presas e são encontrados em águas temperadas e tropicais.',
+                mapImage: 'https://i.ibb.co/RGhpfLgN/Alopias-pelagicus-distmap.png"',
+                habitat: [
+                    'Águas temperadas e tropicais',
+                    'Zona pelágica e costeira',
+                    'Temperatura: 16-24°C',
+                    'Profundidade: 0-500m'
+                ],
+                characteristics: [
+                    'Cauda longa (até 3m)',
+                    'Até 6 metros de comprimento',
+                    'Peso: até 500 kg',
+                    'Alimentação: peixes e lulas'
+                ],
+                conservation: [
+                    'Vulnerável (VU)',
+                    'População em declínio',
+                    'Ameaças: pesca comercial',
+                    'Necessita de conservação'
+                ]
+            }
+        };
+
+        // Mudar espécie
+        function changeSpecies(species) {
+            const data = speciesData[species];
+            
+            // Atualizar botões
+            document.querySelectorAll('.species-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Atualizar conteúdo com animação
+            const elements = {
+                title: document.getElementById('speciesTitle'),
+                scientific: document.getElementById('scientificName'),
+                description: document.getElementById('speciesDescription'),
+                mapImage: document.getElementById('mapImage'),
+                habitat: document.getElementById('habitatInfo'),
+                characteristics: document.getElementById('characteristicsInfo'),
+                conservation: document.getElementById('conservationInfo')
+            };
+            
+            // Fade out
+            Object.values(elements).forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(10px)';
+                el.style.transition = 'all 0.3s ease';
+            });
+            
+            setTimeout(() => {
+                // Atualizar conteúdo
+                elements.title.textContent = data.title;
+                elements.scientific.textContent = data.scientific;
+                elements.description.textContent = data.description;
+                elements.mapImage.src = data.mapImage;
+                
+                // Atualizar listas
+                elements.habitat.innerHTML = data.habitat.map(item => `<li>${item}</li>`).join('');
+                elements.characteristics.innerHTML = data.characteristics.map(item => `<li>${item}</li>`).join('');
+                elements.conservation.innerHTML = data.conservation.map(item => `<li>${item}</li>`).join('');
+                
+                // Fade in
+                Object.values(elements).forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+            }, 300);
+        }
+
+        // Config Modal Functions
+        function openConfig() {
+            document.getElementById('configModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeConfig() {
+            document.getElementById('configModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('configModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeConfig();
+            }
+        });
+
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+        }
+
+        function saveConfig() {
+            alert('Configurações salvas com sucesso! 🌊');
+            closeConfig();
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeConfig();
+            }
+        });
+    </script>
+</body>
+
+</html>
