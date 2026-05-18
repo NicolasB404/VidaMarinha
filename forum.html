@@ -506,6 +506,214 @@
             background: #1976d2;
         }
 
+        /* Config Modal */
+        .config-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .config-modal.active {
+            display: flex;
+        }
+
+        .config-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            border: 3px solid #5b9bd5;
+        }
+
+        .config-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #5b9bd5;
+        }
+
+        .config-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 32px;
+            color: #1976d2;
+            text-transform: uppercase;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 36px;
+            color: #1976d2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-btn:hover {
+            background-color: #5b9bd5;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .config-section {
+            margin-bottom: 30px;
+        }
+
+        .config-section-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 22px;
+            color: #3a628c;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .config-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: rgba(91, 155, 213, 0.1);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .config-option:hover {
+            background-color: rgba(91, 155, 213, 0.2);
+            transform: translateX(5px);
+        }
+
+        .config-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: #3a628c;
+            font-weight: 600;
+        }
+
+        .config-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .config-toggle.active {
+            background-color: #5b9bd5;
+        }
+
+        .config-toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .config-toggle.active .config-toggle-slider {
+            transform: translateX(30px);
+        }
+
+        .config-select {
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 2px solid #5b9bd5;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: #3a628c;
+            background-color: white;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .config-select:hover,
+        .config-select:focus {
+            box-shadow: 0 0 10px rgba(91, 155, 213, 0.5);
+        }
+
+        .config-slider {
+            width: 150px;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to right, #5b9bd5, #1976d2);
+            outline: none;
+        }
+
+        .config-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #1976d2;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #5b9bd5 0%, #1976d2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.4);
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.6);
+            background: linear-gradient(135deg, #7cb3e2 0%, #42a5f5 100%);
+        }
+
+        .settings-btn {
+            padding: 15px 20px;
+            font-size: 24px;
+            min-width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .settings-btn:hover {
+            transform: rotate(90deg) translateY(-2px);
+        }
     </style>
 </head>
 
@@ -531,7 +739,7 @@
 
     <main class="main-content">
         <h1 class="page-title">Fórum de Discussão</h1>
-        
+
         <button class="create-post-btn" onclick="openCreatePostModal()">+ Criar Novo Tópico</button>
 
         <div class="forum-container">
@@ -566,16 +774,18 @@
                 <h2 class="modal-title">Criar Novo Tópico</h2>
                 <button class="close-modal" onclick="closeCreatePostModal()">&times;</button>
             </div>
-            
+
             <form id="createPostForm" onsubmit="createPost(event)">
                 <div class="form-group">
                     <label class="form-label">Título</label>
-                    <input type="text" class="form-input" id="postTitle" required placeholder="Digite o título do tópico">
+                    <input type="text" class="form-input" id="postTitle" required
+                        placeholder="Digite o título do tópico">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Descrição</label>
-                    <textarea class="form-textarea" id="postDescription" required placeholder="Descreva seu tópico..."></textarea>
+                    <textarea class="form-textarea" id="postDescription" required
+                        placeholder="Descreva seu tópico..."></textarea>
                 </div>
 
                 <div class="form-group">
@@ -588,14 +798,88 @@
         </div>
     </div>
 
-    <!-- Modal de Configuração -->
-    <div class="config-modal" id="configModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
-        <div class="config-content" style="background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%); border-radius: 20px; padding: 40px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); position: relative; border: 3px solid #5b9bd5;">
-            <div class="config-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #5b9bd5;">
-                <h2 class="config-title" style="font-family: 'Playfair Display SC', serif; font-size: 32px; color: #1976d2; text-transform: uppercase;">Configurações</h2>
-                <button class="close-btn" onclick="closeConfig()" style="background: none; border: none; font-size: 36px; color: #1976d2; cursor: pointer; transition: all 0.3s ease; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">&times;</button>
+    <div class="config-modal" id="configModal">
+        <div class="config-content">
+            <div class="config-header">
+                <h2 class="config-title">Configurações</h2>
+                <button class="close-btn" onclick="closeConfig()">&times;</button>
             </div>
-            <button class="save-btn" onclick="saveConfig()" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #5b9bd5 0%, #1976d2 100%); color: white; border: none; border-radius: 10px; font-family: 'Playfair Display SC', serif; font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; margin-top: 20px; box-shadow: 0 4px 15px rgba(25, 118, 210, 0.4);">Salvar Configurações</button>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Aparência</h3>
+                <div class="config-option">
+                    <span class="config-label">Modo Escuro</span>
+                    <div class="config-toggle" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Tamanho da Fonte</span>
+                    <input type="range" class="config-slider" min="12" max="24" value="18">
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Tema</span>
+                    <select class="config-select">
+                        <option>Oceano Azul</option>
+                        <option>Mar Tropical</option>
+                        <option>Águas Profundas</option>
+                        <option>Recife de Coral</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Notificações</h3>
+                <div class="config-option">
+                    <span class="config-label">Alertas de Conservação</span>
+                    <div class="config-toggle active" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Novidades do Fórum</span>
+                    <div class="config-toggle active" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Atualizações de Mapas</span>
+                    <div class="config-toggle" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Privacidade</h3>
+                <div class="config-option">
+                    <span class="config-label">Perfil Público</span>
+                    <div class="config-toggle active" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Mostrar Localização</span>
+                    <div class="config-toggle" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Idioma</h3>
+                <div class="config-option">
+                    <span class="config-label">Idioma Principal</span>
+                    <select class="config-select">
+                        <option>Português (Brasil)</option>
+                        <option>English</option>
+                        <option>Español</option>
+                        <option>Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="save-btn" onclick="saveConfig()">Salvar Configurações</button>
         </div>
     </div>
 
@@ -620,7 +904,7 @@
                 id: 2,
                 title: "Plástico nos oceanos: os cientistas encontraram microplásticos no sangue de tubarões-brancos e baleias. O que isso significa para o futuro da vida marinha?",
                 description: "Uma descoberta alarmante foi feita recentemente: microplásticos foram encontrados na corrente sanguínea de grandes predadores marinhos. Isso indica que a poluição chegou a um nível crítico. Precisamos agir agora!",
-                image: "https://images.unsplash.com/photo-1582967788606-a171f1080ca8?w=800",
+                image: "https://i.ibb.co/YTkN7n9v/20220803-poluicao-oceano.jpg",
                 author: "Carlos Mendes",
                 date: new Date(Date.now() - 172800000).toLocaleDateString('pt-BR'),
                 likes: 42,
@@ -650,16 +934,16 @@
         // Criar post
         function createPost(event) {
             event.preventDefault();
-            
+
             const title = document.getElementById('postTitle').value;
             const description = document.getElementById('postDescription').value;
             const imageInput = document.getElementById('postImage');
-            
+
             const userData = localStorage.getItem('usuarioCadastrado');
             const author = userData ? JSON.parse(userData).nome : 'Anônimo';
-            
+
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 const newPost = {
                     id: Date.now(),
                     title: title,
@@ -671,7 +955,7 @@
                     comments: [],
                     likedBy: []
                 };
-                
+
                 posts.unshift(newPost);
                 savePosts();
                 renderPosts();
@@ -679,7 +963,7 @@
                 document.getElementById('createPostForm').reset();
                 alert('Tópico criado com sucesso! 🌊');
             };
-            
+
             if (imageInput.files[0]) {
                 reader.readAsDataURL(imageInput.files[0]);
             }
@@ -692,10 +976,10 @@
                 alert('Faça login para curtir posts! 🌊');
                 return;
             }
-            
+
             const userName = JSON.parse(userData).nome;
             const post = posts.find(p => p.id === postId);
-            
+
             if (post) {
                 const likeIndex = post.likedBy.indexOf(userName);
                 if (likeIndex > -1) {
@@ -705,7 +989,7 @@
                     post.likedBy.push(userName);
                     post.likes++;
                 }
-                
+
                 savePosts();
                 renderPosts();
             }
@@ -718,16 +1002,16 @@
                 alert('Faça login para comentar! 🌊');
                 return;
             }
-            
+
             const userName = JSON.parse(userData).nome;
             const post = posts.find(p => p.id === postId);
-            
+
             if (post && commentText.trim()) {
                 post.comments.push({
                     author: userName,
                     text: commentText.trim()
                 });
-                
+
                 savePosts();
                 renderPosts();
             }
@@ -738,7 +1022,7 @@
             const mainPostsContainer = document.getElementById('mainPosts');
             const recentPostsContainer = document.getElementById('recentPosts');
             const topPostsContainer = document.getElementById('topPosts');
-            
+
             // Posts principais (todos)
             mainPostsContainer.innerHTML = posts.map(post => `
                 <div class="post-card">
@@ -780,7 +1064,7 @@
                     </div>
                 </div>
             `).join('');
-            
+
             // Posts recentes (últimos 3)
             const recentPosts = posts.slice(0, 3);
             recentPostsContainer.innerHTML = recentPosts.map(post => `
@@ -792,7 +1076,7 @@
                     </div>
                 </div>
             `).join('');
-            
+
             // Melhores posts (mais curtidos)
             const topPosts = [...posts].sort((a, b) => b.likes - a.likes).slice(0, 3);
             topPostsContainer.innerHTML = topPosts.map(post => `
@@ -834,16 +1118,16 @@
         }
 
         // Fechar modais ao clicar fora
-        document.getElementById('createPostModal').addEventListener('click', function(e) {
+        document.getElementById('createPostModal').addEventListener('click', function (e) {
             if (e.target === this) closeCreatePostModal();
         });
 
-        document.getElementById('configModal').addEventListener('click', function(e) {
+        document.getElementById('configModal').addEventListener('click', function (e) {
             if (e.target === this) closeConfig();
         });
 
         // Fechar com ESC
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 closeCreatePostModal();
                 closeConfig();
@@ -851,9 +1135,40 @@
         });
 
         // Carregar posts ao iniciar
-        window.onload = function() {
+        window.onload = function () {
             renderPosts();
         };
+        // Config Modal Functions
+        function openConfig() {
+            document.getElementById('configModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeConfig() {
+            document.getElementById('configModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('configModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeConfig();
+            }
+        });
+
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+        }
+
+        function saveConfig() {
+            alert('Configurações salvas com sucesso! 🌊');
+            closeConfig();
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeConfig();
+            }
+        });
     </script>
 </body>
 
