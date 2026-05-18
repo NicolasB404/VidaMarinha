@@ -24,7 +24,7 @@
         }
 
 
-       
+
         /* Header e Navegação */
         .header {
             background-color: #3a628c;
@@ -71,7 +71,7 @@
 
         .logo-container {
             position: absolute;
-            left: 50%;
+            left: 49%;
             transform: translateX(-50%);
             z-index: 10;
         }
@@ -338,6 +338,18 @@
             background: linear-gradient(135deg, #7cb3e2 0%, #42a5f5 100%);
         }
 
+        .settings-btn {
+            padding: 15px 20px;
+            font-size: 24px;
+            min-width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .settings-btn:hover {
+            transform: rotate(90deg) translateY(-2px);
+        }
     </style>
 </head>
 
@@ -356,7 +368,10 @@
 
         <div class="nav-buttons">
             <a href="galeria.html" class="nav-btn">GALERIA</a>
-            <button class="nav-btn" onclick="openConfig()">CONFIG</button>
+            <a href="perfil.html" class="nav-btn">PERFIL</a>
+            <button class="nav-btn settings-btn" onclick="openConfig()" title="Configurações">⚙️</button>
+        </div>
+
         </div>
     </header>
 
