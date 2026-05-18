@@ -71,7 +71,7 @@
 
         .logo-container {
             position: absolute;
-            left: 50%;
+            left: 49%;
             transform: translateX(-50%);
             z-index: 10;
         }
@@ -555,6 +555,19 @@
             box-shadow: 0 6px 20px rgba(25, 118, 210, 0.6);
             background: linear-gradient(135deg, #7cb3e2 0%, #42a5f5 100%);
         }
+
+        .settings-btn {
+            padding: 15px 20px;
+            font-size: 24px;
+            min-width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .settings-btn:hover {
+            transform: rotate(90deg) translateY(-2px);
+        }
     </style>
 </head>
 
@@ -568,12 +581,13 @@
 
         <div class="logo-container">
             <a href="inicial.html"><img src="https://i.ibb.co/7dVmxzpb/Captura-de-tela-2026-05-05-102227-1.png"
-                alt="Logo Preservação da Vida Marinha" class="shark-logo"></a>
+                    alt="Logo Preservação da Vida Marinha" class="shark-logo"></a>
         </div>
 
         <div class="nav-buttons">
             <a href="galeria.html" class="nav-btn">GALERIA</a>
-            <button class="nav-btn" onclick="openConfig()">CONFIG</button>
+            <a href="perfil.html" class="nav-btn">PERFIL</a>
+            <button class="nav-btn settings-btn" onclick="openConfig()" title="Configurações">⚙️</button>
         </div>
     </header>
 
