@@ -571,6 +571,28 @@
             box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
         }
 
+        .btn-logout {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: white;
+        }
+
+        .btn-logout:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 152, 0, 0.6);
+            background: linear-gradient(135deg, #ffb74d, #ffa726);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.6);
+            background: linear-gradient(135deg, #66bb6a, #66bb6a);
+        }
+
         .profile-img-wrapper {
             cursor: pointer;
         }
@@ -689,13 +711,8 @@
                 <p>Faça seu cadastro para proteger os oceanos!</p>
             </div>
 
-            <div class="profile-actions">
-                <a href="cadastro.html" class="profile-btn btn-primary">
-                    <span>✏️</span> Criar Conta
-                </a>
-                <button class="profile-btn btn-danger" onclick="limparDados()">
-                    <span>🗑️</span> Deletar Conta
-                </button>
+            <div class="profile-actions" id="profileActions">
+                <!-- Botões serão inseridos via JavaScript -->
             </div>
         </div>
     </main>
@@ -941,8 +958,47 @@
             event.target.value = '';
         }
 
-        // ===== ATUALIZAR carregarDados() PARA SUPORTAR EDIÇÃO =====
-        // Substitua a função carregarDados() existente por esta versão:
+        // FUNÇÕES DE LOGIN/LOGOUT
+
+        // Renderizar botões de ação conforme estado da conta
+        function renderActionButtons() {
+            const userData = localStorage.getItem('usuarioCadastrado');
+            const container = document.getElementById('profileActions');
+
+            if (userData) {
+                // Usuário logado: mostrar Logout + Deletar Conta
+                container.innerHTML = `
+            <button class="profile-btn btn-logout" onclick="fazerLogout()">
+                <span>🚪</span> Deslogar
+            </button>
+            <button class="profile-btn btn-danger" onclick="limparDados()">
+                <span>🗑️</span> Deletar Conta
+            </button>
+        `;
+            } else {
+                // Usuário não logado: mostrar Logar + Criar Conta
+                container.innerHTML = `
+            <a href="login.html" class="profile-btn btn-login">
+                <span>🔑</span> Logar
+            </a>
+            <a href="cadastro.html" class="profile-btn btn-primary">
+                <span>✏️</span> Criar Conta
+            </a>
+        `;
+            }
+        }
+
+        function fazerLogout() {
+            if (confirm("Deseja realmente sair da sua conta? 🌊")) {
+                // Remove os dados do usuário
+                localStorage.removeItem('usuarioCadastrado');
+
+                alert("Você foi deslogado com sucesso! Volte sempre. 🦈");
+                window.location.href = "inicial.html";
+            }
+        }
+
+        // ===== ATUALIZAR carregarDados() PARA CHAMAR renderActionButtons =====
 
         function carregarDados() {
             const userData = localStorage.getItem('usuarioCadastrado');
@@ -956,15 +1012,12 @@
                 document.getElementById('dataDisplay').textContent = usuario.dataCadastro ?
                     new Date(usuario.dataCadastro).toLocaleString('pt-BR') : '-';
 
-                // Carrega a foto
                 if (usuario.fotoPerfil) {
                     document.getElementById('fotoPerfil').src = usuario.fotoPerfil;
                 }
 
-                // Preenche os inputs para edição
                 document.getElementById('nomeInput').value = usuario.nome || '';
                 document.getElementById('emailInput').value = usuario.email || '';
-                // Senha não preenche por segurança
 
                 document.getElementById('profileInfo').style.display = 'block';
                 document.getElementById('emptyState').style.display = 'none';
@@ -972,9 +1025,10 @@
                 document.getElementById('profileInfo').style.display = 'none';
                 document.getElementById('emptyState').style.display = 'block';
             }
-        }
 
-        // Carrega os dados ao abrir a página
+            // Renderizar botões conforme estado da conta
+            renderActionButtons();
+        }
         window.onload = carregarDados;
     </script>
 </body>
