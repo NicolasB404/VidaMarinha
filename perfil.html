@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Proteção da Vida Marinha</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Header e Navegação */
+        .header {
+            background-color: #3a628c;
+            padding: 32px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            flex: 1;
+            justify-content: space-around;
+        }
+
+        .nav-btn {
+            background-color: #5b9bd5;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+        }
+
+        .nav-btn:hover {
+            background-color: #7cb3e2;
+            color: gold;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .settings-btn {
+            padding: 15px 20px;
+            font-size: 24px;
+            min-width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .settings-btn:hover {
+            transform: rotate(90deg) translateY(-2px);
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .shark-logo {
+            width: 140px;
+            height: 140px;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .shark-logo:hover {
+            transform: scale(1.1);
+        }
+
+        /* Conteúdo Principal */
+        .main-content {
+            background: linear-gradient(135deg, rgba(58, 98, 140, 0.95) 0%, rgba(25, 118, 210, 0.9) 100%);
+            padding: 60px 40px;
+            min-height: calc(100vh - 180px);
+            position: relative;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 25px;
+            padding: 50px 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+        }
+
+        .profile-header {
+            margin-bottom: 30px;
+        }
+
+        .profile-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 42px;
+            color: white;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .profile-subtitle {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 16px;
+            font-style: italic;
+        }
+
+        .profile-img-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img-wrapper:hover .profile-img {
+            transform: scale(1.05);
+        }
+
+        .profile-info {
+            text-align: left;
+            margin: 30px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .info-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 14px;
+            color: #7cb3e2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .info-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: white;
+            font-weight: 500;
+            word-break: break-word;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .profile-btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 16px 25px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #5b9bd5 0%, #1976d2 100%);
+            color: white;
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(25, 118, 210, 0.6);
+            background: linear-gradient(135deg, #7cb3e2 0%, #42a5f5 100%);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff4757 0%, #ff3742 100%);
+            color: white;
+            box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 71, 87, 0.6);
+            background: linear-gradient(135deg, #ff6b7a 0%, #ff5252 100%);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .empty-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+
+        .empty-text {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        /* Modal de Configuração */
+        .config-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .config-modal.active {
+            display: flex;
+        }
+
+        .config-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            border: 3px solid #5b9bd5;
+        }
+
+        .config-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #5b9bd5;
+        }
+
+        .config-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 32px;
+            color: #1976d2;
+            text-transform: uppercase;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 36px;
+            color: #1976d2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-btn:hover {
+            background-color: #5b9bd5;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .config-section {
+            margin-bottom: 30px;
+        }
+
+        .config-section-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 22px;
+            color: #3a628c;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .config-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: rgba(91, 155, 213, 0.1);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .config-option:hover {
+            background-color: rgba(91, 155, 213, 0.2);
+            transform: translateX(5px);
+        }
+
+        .config-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: #3a628c;
+            font-weight: 600;
+        }
+
+        .config-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .config-toggle.active {
+            background-color: #5b9bd5;
+        }
+
+        .config-toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .config-toggle.active .config-toggle-slider {
+            transform: translateX(30px);
+        }
+
+        .config-select {
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 2px solid #5b9bd5;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: #3a628c;
+            background-color: white;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .config-select:hover,
+        .config-select:focus {
+            box-shadow: 0 0 10px rgba(91, 155, 213, 0.5);
+        }
+
+        .config-slider {
+            width: 150px;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to right, #5b9bd5, #1976d2);
+            outline: none;
+        }
+
+        .config-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #1976d2;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .save-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #5b9bd5 0%, #1976d2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.4);
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.6);
+            background: linear-gradient(135deg, #7cb3e2 0%, #42a5f5 100%);
+        }
+
+        .settings-btn {
+            padding: 15px 20px;
+            font-size: 24px;
+            min-width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .settings-btn:hover {
+            transform: rotate(90deg) translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="nav-buttons">
+            <a href="inicial.html" class="nav-btn">FORUM</a>
+            <a href="mapa.html" class="nav-btn">MAPA</a>
+        </div>
+
+        <div class="logo-container">
+            <a href="inicial.html"><img src="https://i.ibb.co/7dVmxzpb/Captura-de-tela-2026-05-05-102227-1.png"
+                    alt="Logo Preservação da Vida Marinha" class="shark-logo"></a>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="galeria.html" class="nav-btn">GALERIA</a>
+            <a href="perfil.html" class="nav-btn">PERFIL</a>
+            <button class="nav-btn settings-btn" onclick="openConfig()" title="Configurações">⚙️</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="profile-container">
+            <div class="profile-header">
+                <h1 class="profile-title">Meu Perfil</h1>
+                <p class="profile-subtitle">Suas informações cadastradas</p>
+            </div>
+
+            <div class="profile-img-wrapper">
+                <img id="fotoPerfil" class="profile-img"
+                    src="https://i.ibb.co/7dVmxzpb/Captura-de-tela-2026-05-05-102227-1.png" alt="Foto de Perfil">
+            </div>
+
+            <div class="profile-info" id="profileInfo">
+                <div class="info-item">
+                    <span class="info-label">👤 Nome</span>
+                    <div class="info-value" id="nomeDisplay">Carregando...</div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">📧 E-mail</span>
+                    <div class="info-value" id="emailDisplay">-</div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">🔒 Senha</span>
+                    <div class="info-value" id="senhaDisplay">-</div>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">📅 Data de Cadastro</span>
+                    <div class="info-value" id="dataDisplay">-</div>
+                </div>
+            </div>
+
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-icon">🌊</div>
+                <div class="empty-text">Nenhuma conta encontrado</div>
+                <p>Faça seu cadastro para proteger os oceanos!</p>
+            </div>
+
+            <div class="profile-actions">
+                <a href="cadastro.html" class="profile-btn btn-primary">
+                    <span>✏️</span> Editar Conta
+                </a>
+                <button class="profile-btn btn-danger" onclick="limparDados()">
+                    <span>🗑️</span> Deletar Conta
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Configuração -->
+    <div class="config-modal" id="configModal">
+        <div class="config-content">
+            <div class="config-header">
+                <h2 class="config-title">Configurações</h2>
+                <button class="close-btn" onclick="closeConfig()">&times;</button>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Aparência</h3>
+                <div class="config-option">
+                    <span class="config-label">Modo Escuro</span>
+                    <div class="config-toggle" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Tamanho da Fonte</span>
+                    <input type="range" class="config-slider" min="12" max="24" value="18">
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Tema</span>
+                    <select class="config-select">
+                        <option>Oceano Azul</option>
+                        <option>Mar Tropical</option>
+                        <option>Águas Profundas</option>
+                        <option>Recife de Coral</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Notificações</h3>
+                <div class="config-option">
+                    <span class="config-label">Alertas de Conservação</span>
+                    <div class="config-toggle active" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Novidades do Fórum</span>
+                    <div class="config-toggle active" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Atualizações de Mapas</span>
+                    <div class="config-toggle" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Privacidade</h3>
+                <div class="config-option">
+                    <span class="config-label">Perfil Público</span>
+                    <div class="config-toggle active" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+                <div class="config-option">
+                    <span class="config-label">Mostrar Localização</span>
+                    <div class="config-toggle" onclick="toggleSwitch(this)">
+                        <div class="config-toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3 class="config-section-title">Idioma</h3>
+                <div class="config-option">
+                    <span class="config-label">Idioma Principal</span>
+                    <select class="config-select">
+                        <option>Português (Brasil)</option>
+                        <option>English</option>
+                        <option>Español</option>
+                        <option>Français</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="save-btn" onclick="saveConfig()">Salvar Configurações</button>
+        </div>
+    </div>
+
+    <script>
+        // Carregar dados do perfil
+        function carregarDados() {
+            const userData = localStorage.getItem('usuarioCadastrado');
+
+            if (userData) {
+                const usuario = JSON.parse(userData);
+
+                document.getElementById('nomeDisplay').textContent = usuario.nome || '-';
+                document.getElementById('emailDisplay').textContent = usuario.email || '-';
+                document.getElementById('senhaDisplay').textContent = usuario.password ? '••••••••' : '-';
+                document.getElementById('dataDisplay').textContent = usuario.dataCadastro ?
+                    new Date(usuario.dataCadastro).toLocaleString('pt-BR') : '-';
+
+                // Carrega a foto
+                if (usuario.fotoPerfil) {
+                    document.getElementById('fotoPerfil').src = usuario.fotoPerfil;
+                }
+
+                document.getElementById('profileInfo').style.display = 'block';
+                document.getElementById('emptyState').style.display = 'none';
+            } else {
+                document.getElementById('profileInfo').style.display = 'none';
+                document.getElementById('emptyState').style.display = 'block';
+            }
+        }
+
+        // Limpar dados
+        function limparDados() {
+            if (confirm("Tem certeza que deseja apagar sua conta? Esta ação não pode ser desfeita.")) {
+                localStorage.removeItem('usuarioCadastrado');
+                alert("Conta apagado com sucesso! 🌊");
+                carregarDados();
+            }
+        }
+
+        // Config Modal Functions
+        function openConfig() {
+            document.getElementById('configModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeConfig() {
+            document.getElementById('configModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('configModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeConfig();
+            }
+        });
+
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+        }
+
+        function saveConfig() {
+            alert('Configurações salvas com sucesso! 🌊');
+            closeConfig();
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeConfig();
+            }
+        });
+
+        // Carrega os dados ao abrir a página
+        window.onload = carregarDados;
+    </script>
+</body>
+
+</html>
