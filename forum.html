@@ -1,1 +1,860 @@
-Irei tentar fazer na etapa 5
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fórum - Proteção da Vida Marinha</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Header e Navegação */
+        .header {
+            background-color: #3a628c;
+            padding: 32px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            flex: 1;
+            justify-content: space-around;
+        }
+
+        .nav-btn {
+            background-color: #5b9bd5;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+        }
+
+        .nav-btn:hover {
+            background-color: #7cb3e2;
+            color: gold;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .settings-btn {
+            padding: 15px 20px;
+            font-size: 24px;
+            min-width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .settings-btn:hover {
+            transform: rotate(90deg) translateY(-2px);
+        }
+
+        .logo-container {
+            position: absolute;
+            left: 48%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .shark-logo {
+            width: 140px;
+            height: 140px;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .shark-logo:hover {
+            transform: scale(1.1);
+        }
+
+        /* Conteúdo Principal */
+        .main-content {
+            background-color: white;
+            padding: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: calc(100vh - 180px);
+            position: relative;
+            z-index: 5;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 42px;
+            color: #1976d2;
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Botão Criar Post */
+        .create-post-btn {
+            display: block;
+            width: fit-content;
+            margin: 0 auto 40px;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #5b9bd5 0%, #1976d2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
+        }
+
+        .create-post-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(25, 118, 210, 0.6);
+            background: linear-gradient(135deg, #7cb3e2 0%, #42a5f5 100%);
+        }
+
+        /* Layout do Fórum */
+        .forum-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar - Visto Recente e Melhores */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .sidebar-section {
+            background: linear-gradient(135deg, #4a6fa5 0%, #3a628c 100%);
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+        }
+
+        .sidebar-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .sidebar-post {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-post:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .sidebar-post:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-post-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .sidebar-post-content {
+            flex: 1;
+        }
+
+        .sidebar-post-title {
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-post-stats {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* Área Principal de Posts */
+        .main-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .post-card {
+            background: linear-gradient(135deg, #0a2647 0%, #144272 100%);
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+            display: flex;
+            gap: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .post-image {
+            width: 280px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .post-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 22px;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .post-description {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .post-author {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .action-btn.liked {
+            background: #e74c3c;
+        }
+
+        .action-btn.liked:hover {
+            background: #c0392b;
+        }
+
+        /* Modal de Criar Post */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #5b9bd5;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 32px;
+            color: #1976d2;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 36px;
+            color: #1976d2;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-modal:hover {
+            background-color: #5b9bd5;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 16px;
+            color: #3a628c;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #5b9bd5;
+            border-radius: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: #1976d2;
+            box-shadow: 0 0 10px rgba(91, 155, 213, 0.5);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-file {
+            padding: 10px;
+            border: 2px dashed #5b9bd5;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-file:hover {
+            border-color: #1976d2;
+            background: rgba(91, 155, 213, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #5b9bd5 0%, #1976d2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(25, 118, 210, 0.5);
+        }
+
+        /* Modal de Comentários */
+        .comments-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .comments-title {
+            font-family: 'Playfair Display SC', serif;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .comment {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .comment-author {
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #7cb3e2;
+        }
+
+        .comment-text {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .comment-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .comment-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Playfair Display', serif;
+            outline: none;
+        }
+
+        .comment-submit {
+            padding: 10px 25px;
+            background: #5b9bd5;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Playfair Display SC', serif;
+            transition: all 0.3s ease;
+        }
+
+        .comment-submit:hover {
+            background: #1976d2;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="nav-buttons">
+            <a href="forum.html" class="nav-btn">FORUM</a>
+            <a href="mapa.html" class="nav-btn">MAPA</a>
+        </div>
+
+        <div class="logo-container">
+            <a href="inicial.html"><img src="https://i.ibb.co/7dVmxzpb/Captura-de-tela-2026-05-05-102227-1.png"
+                    alt="Logo Preservação da Vida Marinha" class="shark-logo"></a>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="galeria.html" class="nav-btn">GALERIA</a>
+            <a href="perfil.html" class="nav-btn">PERFIL</a>
+            <button class="nav-btn settings-btn" onclick="openConfig()" title="Configurações">⚙️</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <h1 class="page-title">Fórum de Discussão</h1>
+        
+        <button class="create-post-btn" onclick="openCreatePostModal()">+ Criar Novo Tópico</button>
+
+        <div class="forum-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h2 class="sidebar-title">Visto Recente</h2>
+                    <div id="recentPosts">
+                        <!-- Posts recentes serão inseridos aqui -->
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h2 class="sidebar-title">Melhores</h2>
+                    <div id="topPosts">
+                        <!-- Melhores posts serão inseridos aqui -->
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Posts Principais -->
+            <div class="main-posts" id="mainPosts">
+                <!-- Posts serão inseridos aqui via JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Criar Post -->
+    <div class="modal" id="createPostModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Criar Novo Tópico</h2>
+                <button class="close-modal" onclick="closeCreatePostModal()">&times;</button>
+            </div>
+            
+            <form id="createPostForm" onsubmit="createPost(event)">
+                <div class="form-group">
+                    <label class="form-label">Título</label>
+                    <input type="text" class="form-input" id="postTitle" required placeholder="Digite o título do tópico">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Descrição</label>
+                    <textarea class="form-textarea" id="postDescription" required placeholder="Descreva seu tópico..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Imagem</label>
+                    <input type="file" class="form-file" id="postImage" accept="image/*" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Publicar Tópico</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Configuração -->
+    <div class="config-modal" id="configModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+        <div class="config-content" style="background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%); border-radius: 20px; padding: 40px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); position: relative; border: 3px solid #5b9bd5;">
+            <div class="config-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #5b9bd5;">
+                <h2 class="config-title" style="font-family: 'Playfair Display SC', serif; font-size: 32px; color: #1976d2; text-transform: uppercase;">Configurações</h2>
+                <button class="close-btn" onclick="closeConfig()" style="background: none; border: none; font-size: 36px; color: #1976d2; cursor: pointer; transition: all 0.3s ease; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">&times;</button>
+            </div>
+            <button class="save-btn" onclick="saveConfig()" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #5b9bd5 0%, #1976d2 100%); color: white; border: none; border-radius: 10px; font-family: 'Playfair Display SC', serif; font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; margin-top: 20px; box-shadow: 0 4px 15px rgba(25, 118, 210, 0.4);">Salvar Configurações</button>
+        </div>
+    </div>
+
+    <script>
+        // Dados dos posts
+        let posts = JSON.parse(localStorage.getItem('forumPosts')) || [
+            {
+                id: 1,
+                title: "O turismo de mergulho com tubarões está matando mais do que salvando? A verdade por trás dos 'shark dives'",
+                description: "Muitos acreditam que o turismo de mergulho ajuda na conservação, mas estudos recentes mostram que a presença constante de humanos pode estar alterando o comportamento natural dos tubarões. Vamos discutir os prós e contras.",
+                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800",
+                author: "Marina Silva",
+                date: new Date(Date.now() - 86400000).toLocaleDateString('pt-BR'),
+                likes: 24,
+                comments: [
+                    { author: "João Pedro", text: "Excelente discussão! Acho que precisamos de mais regulamentação." },
+                    { author: "Ana Costa", text: "Concordo, o equilíbrio é fundamental." }
+                ],
+                likedBy: []
+            },
+            {
+                id: 2,
+                title: "Plástico nos oceanos: os cientistas encontraram microplásticos no sangue de tubarões-brancos e baleias. O que isso significa para o futuro da vida marinha?",
+                description: "Uma descoberta alarmante foi feita recentemente: microplásticos foram encontrados na corrente sanguínea de grandes predadores marinhos. Isso indica que a poluição chegou a um nível crítico. Precisamos agir agora!",
+                image: "https://images.unsplash.com/photo-1582967788606-a171f1080ca8?w=800",
+                author: "Carlos Mendes",
+                date: new Date(Date.now() - 172800000).toLocaleDateString('pt-BR'),
+                likes: 42,
+                comments: [
+                    { author: "Maria Souza", text: "Isso é muito preocupante. Precisamos reduzir o uso de plástico!" }
+                ],
+                likedBy: []
+            },
+            {
+                id: 3,
+                title: "Novas áreas de proteção marinha foram estabelecidas no Atlântico Sul",
+                description: "Finalmente temos boas notícias! Governos se reuniram e criaram novas zonas de proteção para espécies ameaçadas. Isso representa um avanço significativo na conservação marinha.",
+                image: "https://images.unsplash.com/photo-1560275619-4662e36fa65c?w=800",
+                author: "Patricia Lima",
+                date: new Date(Date.now() - 259200000).toLocaleDateString('pt-BR'),
+                likes: 38,
+                comments: [],
+                likedBy: []
+            }
+        ];
+
+        // Salvar posts no localStorage
+        function savePosts() {
+            localStorage.setItem('forumPosts', JSON.stringify(posts));
+        }
+
+        // Criar post
+        function createPost(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('postTitle').value;
+            const description = document.getElementById('postDescription').value;
+            const imageInput = document.getElementById('postImage');
+            
+            const userData = localStorage.getItem('usuarioCadastrado');
+            const author = userData ? JSON.parse(userData).nome : 'Anônimo';
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const newPost = {
+                    id: Date.now(),
+                    title: title,
+                    description: description,
+                    image: e.target.result,
+                    author: author,
+                    date: new Date().toLocaleDateString('pt-BR'),
+                    likes: 0,
+                    comments: [],
+                    likedBy: []
+                };
+                
+                posts.unshift(newPost);
+                savePosts();
+                renderPosts();
+                closeCreatePostModal();
+                document.getElementById('createPostForm').reset();
+                alert('Tópico criado com sucesso! 🌊');
+            };
+            
+            if (imageInput.files[0]) {
+                reader.readAsDataURL(imageInput.files[0]);
+            }
+        }
+
+        // Like/Unlike
+        function toggleLike(postId) {
+            const userData = localStorage.getItem('usuarioCadastrado');
+            if (!userData) {
+                alert('Faça login para curtir posts! 🌊');
+                return;
+            }
+            
+            const userName = JSON.parse(userData).nome;
+            const post = posts.find(p => p.id === postId);
+            
+            if (post) {
+                const likeIndex = post.likedBy.indexOf(userName);
+                if (likeIndex > -1) {
+                    post.likedBy.splice(likeIndex, 1);
+                    post.likes--;
+                } else {
+                    post.likedBy.push(userName);
+                    post.likes++;
+                }
+                
+                savePosts();
+                renderPosts();
+            }
+        }
+
+        // Adicionar comentário
+        function addComment(postId, commentText) {
+            const userData = localStorage.getItem('usuarioCadastrado');
+            if (!userData) {
+                alert('Faça login para comentar! 🌊');
+                return;
+            }
+            
+            const userName = JSON.parse(userData).nome;
+            const post = posts.find(p => p.id === postId);
+            
+            if (post && commentText.trim()) {
+                post.comments.push({
+                    author: userName,
+                    text: commentText.trim()
+                });
+                
+                savePosts();
+                renderPosts();
+            }
+        }
+
+        // Renderizar posts
+        function renderPosts() {
+            const mainPostsContainer = document.getElementById('mainPosts');
+            const recentPostsContainer = document.getElementById('recentPosts');
+            const topPostsContainer = document.getElementById('topPosts');
+            
+            // Posts principais (todos)
+            mainPostsContainer.innerHTML = posts.map(post => `
+                <div class="post-card">
+                    <img src="${post.image}" alt="${post.title}" class="post-image">
+                    <div class="post-content">
+                        <h3 class="post-title">${post.title}</h3>
+                        <p class="post-description">${post.description}</p>
+                        <p class="post-author">Por ${post.author} • ${post.date}</p>
+                        <div class="post-actions">
+                            <button class="action-btn ${post.likedBy.includes(JSON.parse(localStorage.getItem('usuarioCadastrado'))?.nome || '') ? 'liked' : ''}" 
+                                    onclick="toggleLike(${post.id})">
+                                <span>❤️</span>
+                                <span>${post.likes} Curtidas</span>
+                            </button>
+                            <button class="action-btn" onclick="document.getElementById('comment-${post.id}').focus()">
+                                <span>💬</span>
+                                <span>${post.comments.length} Comentários</span>
+                            </button>
+                        </div>
+                        ${post.comments.length > 0 ? `
+                            <div class="comments-section">
+                                <h4 class="comments-title">Comentários (${post.comments.length})</h4>
+                                ${post.comments.map(comment => `
+                                    <div class="comment">
+                                        <div class="comment-author">${comment.author}</div>
+                                        <div class="comment-text">${comment.text}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                        <div class="comment-form">
+                            <input type="text" 
+                                   class="comment-input" 
+                                   id="comment-${post.id}" 
+                                   placeholder="Escreva um comentário..."
+                                   onkeypress="if(event.key === 'Enter') { addComment(${post.id}, this.value); this.value = ''; }">
+                            <button class="comment-submit" onclick="const input = document.getElementById('comment-${post.id}'); addComment(${post.id}, input.value); input.value = '';">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Posts recentes (últimos 3)
+            const recentPosts = posts.slice(0, 3);
+            recentPostsContainer.innerHTML = recentPosts.map(post => `
+                <div class="sidebar-post" onclick="document.getElementById('post-${post.id}').scrollIntoView({behavior: 'smooth'})">
+                    <img src="${post.image}" alt="${post.title}" class="sidebar-post-img">
+                    <div class="sidebar-post-content">
+                        <div class="sidebar-post-title">${post.title.substring(0, 60)}${post.title.length > 60 ? '...' : ''}</div>
+                        <div class="sidebar-post-stats">❤️ ${post.likes} • 💬 ${post.comments.length}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Melhores posts (mais curtidos)
+            const topPosts = [...posts].sort((a, b) => b.likes - a.likes).slice(0, 3);
+            topPostsContainer.innerHTML = topPosts.map(post => `
+                <div class="sidebar-post" onclick="document.getElementById('post-${post.id}').scrollIntoView({behavior: 'smooth'})">
+                    <img src="${post.image}" alt="${post.title}" class="sidebar-post-img">
+                    <div class="sidebar-post-content">
+                        <div class="sidebar-post-title">${post.title.substring(0, 60)}${post.title.length > 60 ? '...' : ''}</div>
+                        <div class="sidebar-post-stats">❤️ ${post.likes} • 💬 ${post.comments.length}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Modal de Criar Post
+        function openCreatePostModal() {
+            document.getElementById('createPostModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCreatePostModal() {
+            document.getElementById('createPostModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Config Modal
+        function openConfig() {
+            document.getElementById('configModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeConfig() {
+            document.getElementById('configModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function saveConfig() {
+            alert('Configurações salvas com sucesso! 🌊');
+            closeConfig();
+        }
+
+        // Fechar modais ao clicar fora
+        document.getElementById('createPostModal').addEventListener('click', function(e) {
+            if (e.target === this) closeCreatePostModal();
+        });
+
+        document.getElementById('configModal').addEventListener('click', function(e) {
+            if (e.target === this) closeConfig();
+        });
+
+        // Fechar com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCreatePostModal();
+                closeConfig();
+            }
+        });
+
+        // Carregar posts ao iniciar
+        window.onload = function() {
+            renderPosts();
+        };
+    </script>
+</body>
+
+</html>
