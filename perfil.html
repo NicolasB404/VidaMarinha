@@ -82,7 +82,7 @@
 
         .logo-container {
             position: absolute;
-            left: 50%;
+            left: 48%;
             transform: translateX(-50%);
             z-index: 10;
         }
@@ -476,6 +476,135 @@
         .settings-btn:hover {
             transform: rotate(90deg) translateY(-2px);
         }
+
+        /* Edição Inline */
+        .info-value.editing {
+            display: none;
+        }
+
+        .info-input {
+            display: none;
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #5b9bd5;
+            border-radius: 8px;
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: #3a628c;
+            background: rgba(255, 255, 255, 0.95);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .info-input:focus {
+            border-color: #1976d2;
+            box-shadow: 0 0 10px rgba(91, 155, 213, 0.5);
+        }
+
+        .info-item.editing .info-input {
+            display: block;
+        }
+
+        .edit-btn {
+            background: none;
+            border: none;
+            color: #7cb3e2;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+
+        .edit-btn:hover {
+            color: white;
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .info-item.editing .edit-btn {
+            display: none;
+        }
+
+        .save-cancel-btns {
+            display: none;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: flex-end;
+        }
+
+        .info-item.editing .save-cancel-btns {
+            display: flex;
+        }
+
+        .btn-save,
+        .btn-cancel {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Playfair Display SC', serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #4caf50, #45a049);
+            color: white;
+        }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-cancel {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+        }
+
+        .profile-img-wrapper {
+            cursor: pointer;
+        }
+
+        .profile-img-wrapper:hover .profile-img {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Overlay de "clicar para editar" */
+        .profile-img-wrapper::after {
+            content: "📷 Clique para alterar";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px;
+            border-radius: 0 0 15px 15px;
+            font-size: 12px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .profile-img-wrapper:hover::after {
+            opacity: 1;
+        }
+
+        #fotoInput {
+            display: none;
+        }
     </style>
 </head>
 
@@ -506,25 +635,46 @@
                 <p class="profile-subtitle">Suas informações cadastradas</p>
             </div>
 
-            <div class="profile-img-wrapper">
+            <div class="profile-img-wrapper" onclick="document.getElementById('fotoInput').click()">
                 <img id="fotoPerfil" class="profile-img"
                     src="https://i.ibb.co/7dVmxzpb/Captura-de-tela-2026-05-05-102227-1.png" alt="Foto de Perfil">
+                <input type="file" id="fotoInput" accept="image/*" onchange="alterarFoto(event)">
             </div>
 
             <div class="profile-info" id="profileInfo">
-                <div class="info-item">
+                <div class="info-item" id="itemNome">
                     <span class="info-label">👤 Nome</span>
                     <div class="info-value" id="nomeDisplay">Carregando...</div>
+                    <input type="text" class="info-input" id="nomeInput" placeholder="Digite seu nome">
+                    <button class="edit-btn" onclick="editarCampo('nome')" title="Editar">✏️</button>
+                    <div class="save-cancel-btns">
+                        <button class="btn-save" onclick="salvarCampo('nome')">💾 Salvar</button>
+                        <button class="btn-cancel" onclick="cancelarEdicao('nome')">❌ Cancelar</button>
+                    </div>
                 </div>
 
-                <div class="info-item">
+                <!-- REPITA PARA EMAIL: -->
+                <div class="info-item" id="itemEmail">
                     <span class="info-label">📧 E-mail</span>
                     <div class="info-value" id="emailDisplay">-</div>
+                    <input type="email" class="info-input" id="emailInput" placeholder="seu@email.com">
+                    <button class="edit-btn" onclick="editarCampo('email')" title="Editar">✏️</button>
+                    <div class="save-cancel-btns">
+                        <button class="btn-save" onclick="salvarCampo('email')">💾 Salvar</button>
+                        <button class="btn-cancel" onclick="cancelarEdicao('email')">❌ Cancelar</button>
+                    </div>
                 </div>
 
-                <div class="info-item">
+                <!-- REPITA PARA SENHA: -->
+                <div class="info-item" id="itemSenha">
                     <span class="info-label">🔒 Senha</span>
                     <div class="info-value" id="senhaDisplay">-</div>
+                    <input type="password" class="info-input" id="senhaInput" placeholder="Nova senha">
+                    <button class="edit-btn" onclick="editarCampo('senha')" title="Editar">✏️</button>
+                    <div class="save-cancel-btns">
+                        <button class="btn-save" onclick="salvarCampo('senha')">💾 Salvar</button>
+                        <button class="btn-cancel" onclick="cancelarEdicao('senha')">❌ Cancelar</button>
+                    </div>
                 </div>
 
                 <div class="info-item">
@@ -703,6 +853,126 @@
                 closeConfig();
             }
         });
+
+        // ===== FUNÇÕES DE EDIÇÃO INLINE =====
+
+        // Editar campo
+        function editarCampo(campo) {
+            const item = document.getElementById(`item${campo.charAt(0).toUpperCase() + campo.slice(1)}`);
+            const display = document.getElementById(`${campo}Display`);
+            const input = document.getElementById(`${campo}Input`);
+
+            // Preenche o input com o valor atual
+            input.value = display.textContent === '-' ? '' : display.textContent.replace('••••••••', '');
+
+            // Ativa modo de edição
+            item.classList.add('editing');
+            input.focus();
+        }
+
+        // Salvar campo
+        function salvarCampo(campo) {
+            const userData = localStorage.getItem('usuarioCadastrado');
+            if (!userData) return;
+
+            const usuario = JSON.parse(userData);
+            const input = document.getElementById(`${campo}Input`);
+            const display = document.getElementById(`${campo}Display`);
+            const item = document.getElementById(`item${campo.charAt(0).toUpperCase() + campo.slice(1)}`);
+
+            const novoValor = input.value.trim();
+
+            if (novoValor) {
+                // Atualiza localStorage
+                if (campo === 'senha') {
+                    usuario.password = novoValor;
+                    display.textContent = '••••••••';
+                } else {
+                    usuario[campo] = novoValor;
+                    display.textContent = novoValor;
+                }
+
+                localStorage.setItem('usuarioCadastrado', JSON.stringify(usuario));
+                alert(`${campo === 'senha' ? 'Senha' : campo === 'nome' ? 'Nome' : 'E-mail'} atualizado com sucesso! 🌊`);
+            }
+
+            // Sai do modo de edição
+            item.classList.remove('editing');
+        }
+
+        // Cancelar edição
+        function cancelarEdicao(campo) {
+            const item = document.getElementById(`item${campo.charAt(0).toUpperCase() + campo.slice(1)}`);
+            item.classList.remove('editing');
+        }
+
+        // Alterar foto de perfil
+        function alterarFoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                alert('Por favor, selecione apenas arquivos de imagem.');
+                return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                alert('A imagem deve ter no máximo 5MB.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                // Atualiza a imagem na tela
+                document.getElementById('fotoPerfil').src = e.target.result;
+
+                // Salva no localStorage
+                const userData = localStorage.getItem('usuarioCadastrado');
+                if (userData) {
+                    const usuario = JSON.parse(userData);
+                    usuario.fotoPerfil = e.target.result;
+                    localStorage.setItem('usuarioCadastrado', JSON.stringify(usuario));
+                    alert('Foto atualizada com sucesso! 🌊');
+                }
+            };
+            reader.readAsDataURL(file);
+
+            // Limpa input para permitir mesma imagem novamente
+            event.target.value = '';
+        }
+
+        // ===== ATUALIZAR carregarDados() PARA SUPORTAR EDIÇÃO =====
+        // Substitua a função carregarDados() existente por esta versão:
+
+        function carregarDados() {
+            const userData = localStorage.getItem('usuarioCadastrado');
+
+            if (userData) {
+                const usuario = JSON.parse(userData);
+
+                document.getElementById('nomeDisplay').textContent = usuario.nome || '-';
+                document.getElementById('emailDisplay').textContent = usuario.email || '-';
+                document.getElementById('senhaDisplay').textContent = usuario.password ? '••••••••' : '-';
+                document.getElementById('dataDisplay').textContent = usuario.dataCadastro ?
+                    new Date(usuario.dataCadastro).toLocaleString('pt-BR') : '-';
+
+                // Carrega a foto
+                if (usuario.fotoPerfil) {
+                    document.getElementById('fotoPerfil').src = usuario.fotoPerfil;
+                }
+
+                // Preenche os inputs para edição
+                document.getElementById('nomeInput').value = usuario.nome || '';
+                document.getElementById('emailInput').value = usuario.email || '';
+                // Senha não preenche por segurança
+
+                document.getElementById('profileInfo').style.display = 'block';
+                document.getElementById('emptyState').style.display = 'none';
+            } else {
+                document.getElementById('profileInfo').style.display = 'none';
+                document.getElementById('emptyState').style.display = 'block';
+            }
+        }
 
         // Carrega os dados ao abrir a página
         window.onload = carregarDados;
